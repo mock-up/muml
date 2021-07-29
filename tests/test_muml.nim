@@ -1,5 +1,10 @@
 import unittest, json, mumlnim
-include "assets/basic_muml.json"
 
-test "get movie, image and audio":
-  discard
+suite "to parse videos":
+  let
+    jsonStr = "tests/assets/muml_video.json".readFile()
+    jsonObj = jsonStr.parseJson
+  echo jsonObj
+
+  test "get path of video":
+    check(jsonObj.getVideo.path == "/xxx/clip1.mp4")
