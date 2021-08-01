@@ -20,17 +20,21 @@ type
 proc removeDoubleQuotation (str: string): string =
   result = str[0..str.len-1]
 
-proc muml* (path: string): JsonNode = discard
-proc content* (muml: JsonNode): JsonNode = discard
-
-proc getVideo* (muml: JsonNode): mumlVideo =
-  if not muml.hasKey("muml"):
+proc muml* (path: string): JsonNode =
+  let json = path.readFile().parseJson
+  if not json.hasKey("muml"):
     raise newException(Exception, "no muml")
-  if not muml["muml"].hasKey("content"):
-    raise newException(Exception, "no content")
+  result = json["muml"]
 
+proc content* (muml: JsonNode): JsonNode =
+  if not muml.hasKey("content"):
+    raise newException(Exception, "no content")
+  result = muml["content"]
+
+proc getVideo* (content: JsonNode): mumlVideo =
   result = mumlVideo()
-  for tag in muml["muml"]["content"].items:
+  
+  for tag in content.items:
     if not tag.hasKey("type"):
       raise newException(Exception, "no type tag")
     case tag["type"].getStr.removeDoubleQuotation:

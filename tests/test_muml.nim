@@ -1,4 +1,4 @@
-import unittest, json, mumlnim
+import unittest, mumlnim
 
 suite "to parse videos":
   let content = muml("tests/assets/muml_video.json").content
