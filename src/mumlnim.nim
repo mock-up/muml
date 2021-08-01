@@ -20,6 +20,9 @@ type
 proc removeDoubleQuotation (str: string): string =
   result = str[0..str.len-1]
 
+proc muml* (path: string): JsonNode = discard
+proc content* (muml: JsonNode): JsonNode = discard
+
 proc getVideo* (muml: JsonNode): mumlVideo =
   if not muml.hasKey("muml"):
     raise newException(Exception, "no muml")
