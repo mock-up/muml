@@ -2,3 +2,4 @@
 .DS_Store
 
 tests/test_muml
+tests/test_video
