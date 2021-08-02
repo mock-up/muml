@@ -1,6 +1,6 @@
 import unittest, mumlnim
 
-suite "to parse videos":
+suite "to parse a simple video":
   let
     content = muml("tests/assets/muml_video.json").content
     video = content[0]
@@ -28,3 +28,14 @@ suite "to parse videos":
   
   test "get audio-volume of video":
     check video.audio.volume == 100.0
+
+suite "to parse a video includes animations":
+  let
+    content = muml("tests/assets/muml_video_include_animation.json").content
+    video = content[0]
+  
+  test "get video-position of video":
+    check video.video.position.value == @[
+      (x: (start: 0, `end`: 50), y: (start: 0, `end`: 0)),
+      (x: (start: 50, `end`: 100), y: (start: 0, `end`: -50))
+    ]
