@@ -1,0 +1,168 @@
+{
+ "muml": {
+    "content": [
+      {
+        "type": "video",
+        "path": "/xxx/clip1.mp4",
+        "frame": {
+          "start": 0,
+          "end": 100
+        },
+        "video": {
+          "frame": {
+            "start": 0,
+            "end": 100
+          },
+          "position": [
+            {
+              "frame": {
+                "start": 0,
+                "end": 50
+              },
+              "value": {
+                "x": {
+                  "start": 0,
+                  "end": 50
+                },
+                "y": {
+                  "start": 0,
+                  "end": 0
+                }
+              }
+            },
+            {
+              "frame": {
+                "start": 50,
+                "end": 100
+              },
+              "value": {
+                "x": {
+                  "start": 50,
+                  "end": 100
+                },
+                "y": {
+                  "start": 0,
+                  "end": -50
+                }
+              }
+            }
+          ],
+          "scale": [
+            {
+              "frame": {
+                "start": 10,
+                "end": 70
+              },
+              "value": {
+                "width": {
+                  "start": 100,
+                  "end": 110
+                },
+                "height": {
+                  "start": 100,
+                  "end": 90
+                }
+              }
+            },
+            {
+              "frame": {
+                "start": 70,
+                "end": 90
+              },
+              "value": {
+                "width": {
+                  "start": 110,
+                  "end": 70
+                },
+                "height": {
+                  "start": 90,
+                  "end": 120
+                }
+              }
+            }
+          ],
+          "rotate": [
+              {
+              "frame": {
+                "start": 10,
+                "end": 70
+              },
+              "value": {
+                "value": {
+                  "start": 0,
+                  "end": 10
+                }
+              }
+            },
+            {
+              "frame": {
+                "start": 70,
+                "end": 100
+              },
+              "value": {
+                "value": {
+                  "start": 10,
+                  "end": 20
+                }
+              }
+            }
+          ],
+          "opacity": [
+              {
+              "frame": {
+                "start": 10,
+                "end": 40
+              },
+              "value": {
+                "value": {
+                  "start": 0,
+                  "end": 10
+                }
+              }
+            },
+            {
+              "frame": {
+                "start": 40,
+                "end": 70
+              },
+              "value": {
+                "value": {
+                  "start": 10,
+                  "end": 90
+                }
+              }
+            }
+          ]
+        },
+        "audio": {
+          "volume": [
+              {
+              "frame": {
+                "start": 0,
+                "end": 5.5
+              },
+              "value": {
+                "value": {
+                  "start": 100,
+                  "end": 150
+                }
+              }
+            },
+            {
+              "frame": {
+                "start": 5.5,
+                "end": 20
+              },
+              "value": {
+                "value": {
+                  "start": 150,
+                  "end": 40
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

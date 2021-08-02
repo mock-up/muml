@@ -15,19 +15,24 @@ suite "to parse a simple video":
     check video.video.frame == (start: 0.0, `end`: 100.0)
   
   test "get video-position of video":
-    check video.video.position == (x: 0.0, y: 0.0)
+    let position = @[muml2DPosition(frame: (-1.0, -1.0), x: (0.0, 0.0), y: (0.0, 0.0))]
+    check video.video.position == position
   
   test "get video-scale of video":
-    check video.video.scale == (width: 100.0, height: 100.0)
+    let scale = @[mumlScale(frame: (-1.0, -1.0), width: (100.0, 100.0), height: (100.0, 100.0))]
+    check video.video.scale == scale
   
   test "get video-rotate of video":
-    check video.video.rotate == 0.0
+    let rotate = @[mumlValue(frame: (-1.0, -1.0), value: (0.0, 0.0))]
+    check video.video.rotate == rotate
   
   test "get video-opacity of video":
-    check video.video.opacity == 0.0
+    let opacity = @[mumlValue(frame: (-1.0, -1.0), value: (0.0, 0.0))]
+    check video.video.opacity == opacity
   
   test "get audio-volume of video":
-    check video.audio.volume == 100.0
+    let volume = @[mumlValue(frame: (-1.0, -1.0), value: (100.0, 100.0))]
+    check video.audio.volume == volume
 
 suite "to parse a video includes animations":
   let
@@ -35,7 +40,4 @@ suite "to parse a video includes animations":
     video = content[0]
   
   test "get video-position of video":
-    check video.video.position.value == @[
-      (x: (start: 0, `end`: 50), y: (start: 0, `end`: 0)),
-      (x: (start: 50, `end`: 100), y: (start: 0, `end`: -50))
-    ]
+    check video.video.position[0].frame.start == 0.0
