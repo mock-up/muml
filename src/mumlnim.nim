@@ -63,7 +63,7 @@ proc getFrame (muml: mumlNode): mumlFloatRange =
   result = (start: muml["frame"]["start"].getFloat, `end`: muml["frame"]["end"].getFloat)
 
 proc getFloatValueProperty (muml: mumlNode, name: string): mumlFloatRange =
-  result = (start: muml["value"][name]["start"].getFloat, `end`: muml["value"][name]["end"].getFloat)
+  result = (start: muml["value"]["start"][name].getFloat, `end`: muml["value"]["end"][name].getFloat)
 
 proc getVideo (muml: mumlNode): mumlObject =
   result = mumlObject(kind: mumlVideo)
