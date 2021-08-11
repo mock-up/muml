@@ -5,14 +5,23 @@ type
 
   mumlKind* = enum
     mumlVideo
+    mumlAudio
+    mumlRectangle
 
   mumlObject* = object
+    frame*: mumlFloatRange
     case kind: mumlKind
     of mumlVideo:
       path*: string
-      frame*: tuple[start: float, `end`: float]
       video*: mumlVideo_Video
       audio*: mumlVideo_Audio
+    of mumlAudio:
+      volume*: seq[mumlValue]
+      balance*: seq[mumlAudioBalance]
+      playback_position*: seq[mumlValue]
+      speed*: seq[mumlValue]
+    of mumlRectangle:
+      position*: seq[muml2DPosition]
 
   mumlVideo_Video* = object
     frame*: tuple[start: float, `end`: float]
@@ -39,12 +48,19 @@ type
   mumlValue* = object
     frame*: mumlFloatRange
     value*: mumlFloatRange
+  
+  mumlAudioBalance* = object
 
 proc removeDoubleQuotation (str: string): string =
   result = str[0..str.len-1]
 
 proc muml* (path: string): mumlNode =
   let json = path.readFile().parseJson
+  if not json.hasKey("muml"):
+    raise newException(Exception, "no muml")
+  result = json["muml"]
+
+proc muml* (json: JsonNode): mumlNode =
   if not json.hasKey("muml"):
     raise newException(Exception, "no muml")
   result = json["muml"]
@@ -163,3 +179,10 @@ proc `[]`* (muml: mumlNode, index: int): mumlObject {.inline.} =
   result = case target_node.type:
     of "video": getVideo(target_node)
     else: raise newException(Exception, "not found tag")
+
+iterator element* (muml: mumlNode): mumlObject =
+  for elem in muml.items:
+    yield case elem.type:
+      of "vudeo": getVideo(elem)
+      else: mumlObject()
+      # else: raise newException(Exception, "not found tag")
