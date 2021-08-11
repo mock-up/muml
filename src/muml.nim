@@ -32,5 +32,6 @@ iterator element* (muml: mumlNode): mumlObject =
   for elem in muml.items:
     yield case elem.type:
       of "video": getVideo(elem)
+      of "rectangle": getRectangle(elem)
       else: mumlObject()
       # else: raise newException(Exception, "not found tag")

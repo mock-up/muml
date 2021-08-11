@@ -26,6 +26,7 @@ type
     position*: seq[muml2DPosition]
     width*: seq[mumlValue]
     height*: seq[mumlValue]
+    scale*: seq[mumlScale]
     rotate*: seq[mumlValue]
     color*: seq[mumlRGB]
     opacity*: seq[mumlValue]
