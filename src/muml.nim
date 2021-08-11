@@ -30,6 +30,6 @@ proc `[]`* (muml: mumlNode, index: int): mumlObject {.inline.} =
 iterator element* (muml: mumlNode): mumlObject =
   for elem in muml.items:
     yield case elem.type:
-      of "vudeo": getVideo(elem)
+      of "video": getVideo(elem)
       else: mumlObject()
       # else: raise newException(Exception, "not found tag")
