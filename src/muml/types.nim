@@ -1,27 +1,34 @@
-import json
+import json, Palette/color
 
 type
   mumlNode* = JsonNode
 
   mumlKind* = enum
-    mumlVideo
-    mumlAudio
-    mumlRectangle
+    mumlKindVideo
+    mumlKindAudio
+    mumlKindRectangle
 
   mumlObject* = object
     frame*: mumlFloatRange
     case kind*: mumlKind
-    of mumlVideo:
+    of mumlKindVideo:
       path*: string
       video*: mumlVideo_Video
       audio*: mumlVideo_Audio
-    of mumlAudio:
+    of mumlKindAudio:
       volume*: seq[mumlValue]
       balance*: seq[mumlAudioBalance]
       playback_position*: seq[mumlValue]
       speed*: seq[mumlValue]
-    of mumlRectangle:
-      position*: seq[muml2DPosition]
+    of mumlKindRectangle: rectangle*: mumlRectangle
+  
+  mumlRectangle* = object
+    position*: seq[muml2DPosition]
+    width*: seq[mumlValue]
+    height*: seq[mumlValue]
+    rotate*: seq[mumlValue]
+    color*: seq[mumlRGB]
+    opacity*: seq[mumlValue]
 
   mumlVideo_Video* = object
     frame*: tuple[start: float, `end`: float]
@@ -39,6 +46,10 @@ type
     frame*: mumlFloatRange
     x*: mumlFloatRange
     y*: mumlFloatRange
+
+  mumlRGB* = object
+    frame*: mumlFloatRange
+    color*: tRGB
   
   mumlScale* = object
     frame*: mumlFloatRange
