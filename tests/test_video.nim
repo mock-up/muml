@@ -1,4 +1,4 @@
-import unittest, mumlnim
+import unittest, muml
 
 suite "to parse a simple video":
   let
@@ -23,15 +23,15 @@ suite "to parse a simple video":
     check video.video.scale == scale
   
   test "get video-rotate of video":
-    let rotate = @[mumlValue(frame: (-1.0, -1.0), value: (0.0, 0.0))]
+    let rotate = @[mumlValue(frame: (-INF, -INF), value: (0.0, 0.0))]
     check video.video.rotate == rotate
   
   test "get video-opacity of video":
-    let opacity = @[mumlValue(frame: (-1.0, -1.0), value: (0.0, 0.0))]
+    let opacity = @[mumlValue(frame: (-INF, -INF), value: (0.0, 0.0))]
     check video.video.opacity == opacity
   
   test "get audio-volume of video":
-    let volume = @[mumlValue(frame: (-1.0, -1.0), value: (100.0, 100.0))]
+    let volume = @[mumlValue(frame: (-INF, -INF), value: (100.0, 100.0))]
     check video.audio.volume == volume
 
 suite "to parse a video includes animations":
