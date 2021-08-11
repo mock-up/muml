@@ -1,7 +1,7 @@
 import json, types, utils
 
 proc getVideo* (muml: mumlNode): mumlObject =
-  result = mumlObject(kind: mumlVideo)
+  result = mumlObject(kind: mumlKindVideo)
   for key, val in muml.pairs:
     case key:
     of "path":
@@ -15,22 +15,7 @@ proc getVideo* (muml: mumlNode): mumlObject =
         of "frame":
           result.video.frame.start = val2["start"].getFloat
           result.video.frame.`end` = val2["end"].getFloat
-        of "position":
-          case val2.kind:
-          of JObject:
-            var position: muml2DPosition
-            position.frame = (-1.0, -1.0)
-            position.x = (val2["x"].getFloat, val2["x"].getFloat)
-            position.y = (val2["y"].getFloat, val2["y"].getFloat)
-            result.video.position.add position
-          of JArray:
-            for pos in val2.items:
-              var position: muml2DPosition
-              position.frame = pos.getFrame
-              position.x = pos.getFloatValueProperty("x")
-              position.y = pos.getFloatValueProperty("y")
-              result.video.position.add position
-          else: raise newException(Exception, "invalid value")
+        of "position": result.video.position = val2.getPosition
         of "scale":
           case val2.kind:
           of JObject:
