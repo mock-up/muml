@@ -1,4 +1,5 @@
-import json, muml/[types, utils, video]
+import json, muml/[types, utils, video, rectangle]
+export types, utils, video, rectangle
 
 proc muml* (path: string): mumlNode =
   let json = path.readFile().parseJson
