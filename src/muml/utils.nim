@@ -9,6 +9,22 @@ proc getFloatValueProperty* (muml: mumlNode, name: string): mumlFloatRange =
 proc getFrame* (muml: mumlNode): mumlFloatRange =
   result = (start: muml["frame"]["start"].getFloat, `end`: muml["frame"]["end"].getFloat)
 
+proc getNumberValue* (muml: mumlNode): seq[mumlValue] =
+  result = @[]
+  case muml.kind:
+  of JInt, JFloat:
+    var value = mumlValue()
+    value.frame = (-INF, -INF)
+    value.value = (muml.getFloat, muml.getFloat)
+    result.add value
+  of JArray:
+    for item in muml.items:
+      var value = mumlValue()
+      value.frame = item.getFrame
+      value.value = item.getFloatValueProperty("value")
+      result.add value
+  else: raise newException(Exception, "invalid value")
+
 proc getPosition* (muml: mumlNode): seq[muml2DPosition] =
   result = @[]
   case muml.kind:

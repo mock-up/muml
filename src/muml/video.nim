@@ -32,48 +32,9 @@ proc getVideo* (muml: mumlNode): mumlObject =
               scale.height = scl.getFloatValueProperty("height")
               result.video.scale.add scale
           else: raise newException(Exception, "invalid value")
-        of "rotate":
-          case val2.kind:
-          of JInt, JFloat:
-            var rotate = mumlValue()
-            rotate.frame = (-1.0, -1.0)
-            rotate.value = (val2.getFloat, val2.getFloat)
-            result.video.rotate.add rotate
-          of JArray:
-            for rtt in val2.items:
-              var rotate = mumlValue()
-              rotate.frame = rtt.getFrame
-              rotate.value = rtt.getFloatValueProperty("value")
-              result.video.rotate.add rotate
-          else: raise newException(Exception, "invalid value")
-        of "opacity":
-          case val2.kind:
-          of JInt, JFloat:
-            var opacity = mumlValue()
-            opacity.frame = (-1.0, -1.0)
-            opacity.value = (val2.getFloat, val2.getFloat)
-            result.video.opacity.add opacity
-          of JArray:
-            for opc in val2.items:
-              var opacity = mumlValue()
-              opacity.frame = opc.getFrame
-              opacity.value = opc.getFloatValueProperty("value")
-              result.video.opacity.add opacity
-          else: raise newException(Exception, "invalid value")
+        of "rotate": result.video.rotate = val2.getNumberValue
+        of "opacity": result.video.opacity = val2.getNumberValue
     of "audio":
       for key2, val2 in val.pairs:
         case key2:
-        of "volume":
-          case val2.kind:
-          of JInt, JFloat:
-            var volume = mumlValue()
-            volume.frame = (-1.0, -1.0)
-            volume.value = (val2.getFloat, val2.getFloat)
-            result.audio.volume.add volume
-          of JArray:
-            for vol in val2.items:
-              var volume = mumlValue()
-              volume.frame = vol.getFrame
-              volume.value = vol.getFloatValueProperty("value")
-              result.audio.volume.add volume
-          else: raise newException(Exception, "invalid value")
+        of "volume": result.audio.volume = val2.getNumberValue
