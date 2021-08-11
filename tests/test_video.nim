@@ -15,23 +15,23 @@ suite "to parse a simple video":
     check video.video.frame == (start: 0.0, `end`: 100.0)
   
   test "get video-position of video":
-    let position = @[muml2DPosition(frame: (-1.0, -1.0), x: (0.0, 0.0), y: (0.0, 0.0))]
+    let position = @[muml2DPosition(frame: (-INF, -INF), x: (0.0, -INF), y: (0.0, -INF))]
     check video.video.position == position
   
   test "get video-scale of video":
-    let scale = @[mumlScale(frame: (-1.0, -1.0), width: (100.0, 100.0), height: (100.0, 100.0))]
+    let scale = @[mumlScale(frame: (-INF, -INF), width: (100.0, -INF), height: (100.0, -INF))]
     check video.video.scale == scale
   
   test "get video-rotate of video":
-    let rotate = @[mumlValue(frame: (-INF, -INF), value: (0.0, 0.0))]
+    let rotate = @[mumlValue(frame: (-INF, -INF), value: (0.0, -INF))]
     check video.video.rotate == rotate
   
   test "get video-opacity of video":
-    let opacity = @[mumlValue(frame: (-INF, -INF), value: (0.0, 0.0))]
+    let opacity = @[mumlValue(frame: (-INF, -INF), value: (0.0, -INF))]
     check video.video.opacity == opacity
   
   test "get audio-volume of video":
-    let volume = @[mumlValue(frame: (-INF, -INF), value: (100.0, 100.0))]
+    let volume = @[mumlValue(frame: (-INF, -INF), value: (100.0, -INF))]
     check video.audio.volume == volume
 
 suite "to parse a video includes animations":

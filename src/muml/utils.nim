@@ -15,7 +15,7 @@ proc getNumberValue* (muml: mumlNode): seq[mumlValue] =
   of JInt, JFloat:
     var value = mumlValue()
     value.frame = (-INF, -INF)
-    value.value = (muml.getFloat, muml.getFloat)
+    value.value = (muml.getFloat, -INF)
     result.add value
   of JArray:
     for item in muml.items:
@@ -30,9 +30,9 @@ proc getPosition* (muml: mumlNode): seq[muml2DPosition] =
   case muml.kind:
   of JObject:
     var position = muml2DPosition()
-    position.frame = (-1.0, -1.0)
-    position.x = (muml["x"].getFloat, muml["x"].getFloat)
-    position.y = (muml["y"].getFloat, muml["y"].getFloat)
+    position.frame = (-INF, -INF)
+    position.x = (muml["x"].getFloat, -INF)
+    position.y = (muml["y"].getFloat, -INF)
     result.add position
   of JArray:
     for item in muml.items:
@@ -41,4 +41,21 @@ proc getPosition* (muml: mumlNode): seq[muml2DPosition] =
       position.x = item.getFloatValueProperty("x")
       position.y = item.getFloatValueProperty("y")
       result.add position
+  else: raise newException(Exception, "invalid value")
+
+proc getScale* (muml: mumlNode): seq[mumlScale] =
+  result = @[]
+  case muml.kind:
+  of JObject:
+    var scale = mumlScale()
+    scale.frame = (-INF, -INF)
+    scale.width = (muml["width"].getFloat, -INF)
+    scale.height = (muml["height"].getFloat, -INF)
+    result.add scale
+  of JArray:
+    for item in muml:
+      var scale = mumlScale()
+      scale.width = item.getFloatValueProperty("width")
+      scale.height = item.getFloatValueProperty("height")
+      result.add scale
   else: raise newException(Exception, "invalid value")
