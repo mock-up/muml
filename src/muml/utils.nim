@@ -1,4 +1,4 @@
-import json, types
+import json, types, Palette/color
 
 proc removeDoubleQuotation* (str: string): string =
   result = str[0..str.len-1]
@@ -58,4 +58,28 @@ proc getScale* (muml: mumlNode): seq[mumlScale] =
       scale.width = item.getFloatValueProperty("width")
       scale.height = item.getFloatValueProperty("height")
       result.add scale
+  else: raise newException(Exception, "invalid value")
+
+proc getRGB* (muml: mumlNode): seq[mumlRGB] =
+  result = @[]
+  case muml.kind:
+  of JObject:
+    var color = mumlRGB()
+    color.frame = (-INF, -INF)
+    var
+      red = muml["red"].getFloat
+      green = muml["green"].getFloat
+      blue = muml["blue"].getFloat
+    color.color = newRGB(red.tBinaryRange, green.tBinaryRange, blue.tBinaryRange)
+    result.add color
+  of JArray:
+    for item in muml:
+      var color = mumlRGB()
+      color.frame = (-INF, -INF)
+      var
+        red = muml["red"].getFloat
+        green = muml["green"].getFloat
+        blue = muml["blue"].getFloat
+      color.color = newRGB(red.tBinaryRange, green.tBinaryRange, blue.tBinaryRange)
+      result.add color
   else: raise newException(Exception, "invalid value")
