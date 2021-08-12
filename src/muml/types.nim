@@ -17,7 +17,7 @@ type
 
   mumlObject* = object
     layer*: Natural
-    frame*: mumlFloatRange
+    frame*: mumlIntRange
     case kind*: mumlKind
     of mumlKindVideo:
       path*: string
@@ -40,7 +40,7 @@ type
     opacity*: seq[mumlValue]
 
   mumlVideo_Video* = object
-    frame*: tuple[start: float, `end`: float]
+    frame*: mumlIntRange
     position*: seq[muml2DPosition]
     scale*: seq[mumlScale]
     rotate*: seq[mumlValue]
@@ -49,24 +49,25 @@ type
   mumlVideo_Audio* = object
     volume*: seq[mumlValue]
 
+  mumlIntRange* = tuple[start: int, `end`: int]
   mumlFloatRange* = tuple[start: float, `end`: float]
 
   muml2DPosition* = object
-    frame*: mumlFloatRange
+    frame*: mumlIntRange
     x*: mumlFloatRange
     y*: mumlFloatRange
 
   mumlRGB* = object
-    frame*: mumlFloatRange
+    frame*: mumlIntRange
     color*: tRGB
   
   mumlScale* = object
-    frame*: mumlFloatRange
+    frame*: mumlIntRange
     width*: mumlFloatRange
     height*: mumlFloatRange
   
   mumlValue* = object
-    frame*: mumlFloatRange
+    frame*: mumlIntRange
     value*: mumlFloatRange
   
   mumlAudioBalance* = object

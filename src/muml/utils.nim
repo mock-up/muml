@@ -6,16 +6,16 @@ proc removeDoubleQuotation* (str: string): string =
 proc getFloatValueProperty* (muml: mumlNode, name: string): mumlFloatRange =
   result = (start: muml["value"]["start"][name].getFloat, `end`: muml["value"]["end"][name].getFloat)
 
-proc getFrame* (muml: mumlNode): mumlFloatRange =
-  result = (start: muml["frame"]["start"].getFloat, `end`: muml["frame"]["end"].getFloat)
+proc getFrame* (muml: mumlNode): mumlIntRange =
+  result = (start: muml["frame"]["start"].getInt, `end`: muml["frame"]["end"].getInt)
 
 proc getNumberValue* (muml: mumlNode): seq[mumlValue] =
   result = @[]
   case muml.kind:
   of JInt, JFloat:
     var value = mumlValue()
-    value.frame = (-INF, -INF)
-    value.value = (muml.getFloat, -INF)
+    value.frame = (-1, -1)
+    value.value = (muml.getFloat, NAN)
     result.add value
   of JArray:
     for item in muml.items:
@@ -30,9 +30,9 @@ proc getPosition* (muml: mumlNode): seq[muml2DPosition] =
   case muml.kind:
   of JObject:
     var position = muml2DPosition()
-    position.frame = (-INF, -INF)
-    position.x = (muml["x"].getFloat, -INF)
-    position.y = (muml["y"].getFloat, -INF)
+    position.frame = (-1, -1)
+    position.x = (muml["x"].getFloat, NAN)
+    position.y = (muml["y"].getFloat, NAN)
     result.add position
   of JArray:
     for item in muml.items:
@@ -48,9 +48,9 @@ proc getScale* (muml: mumlNode): seq[mumlScale] =
   case muml.kind:
   of JObject:
     var scale = mumlScale()
-    scale.frame = (-INF, -INF)
-    scale.width = (muml["width"].getFloat, -INF)
-    scale.height = (muml["height"].getFloat, -INF)
+    scale.frame = (-1, -1)
+    scale.width = (muml["width"].getFloat, NAN)
+    scale.height = (muml["height"].getFloat, NAN)
     result.add scale
   of JArray:
     for item in muml:
@@ -65,7 +65,7 @@ proc getRGB* (muml: mumlNode): seq[mumlRGB] =
   case muml.kind:
   of JObject:
     var color = mumlRGB()
-    color.frame = (-INF, -INF)
+    color.frame = (-1, -1)
     var
       red = muml["red"].getFloat
       green = muml["green"].getFloat
@@ -75,7 +75,7 @@ proc getRGB* (muml: mumlNode): seq[mumlRGB] =
   of JArray:
     for item in muml:
       var color = mumlRGB()
-      color.frame = (-INF, -INF)
+      color.frame = (-1, -1)
       var
         red = muml["red"].getFloat
         green = muml["green"].getFloat
