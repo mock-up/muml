@@ -7,8 +7,16 @@ type
     mumlKindVideo
     mumlKindAudio
     mumlKindRectangle
+  
+  mumlHeader* = object
+    project_name*: string
+    width*: int
+    height*: int
+    fps*: int
+    last_frame_number*: int
 
   mumlObject* = object
+    layer*: Natural
     frame*: mumlFloatRange
     case kind*: mumlKind
     of mumlKindVideo:

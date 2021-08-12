@@ -12,6 +12,11 @@ proc muml* (json: JsonNode): mumlNode =
     raise newException(Exception, "no muml")
   result = json["muml"]
 
+proc header* (muml: mumlNode): mumlNode =
+  if not muml.hasKey("header"):
+    raise newException(Exception, "no header")
+  result = muml["header"]
+
 proc content* (muml: mumlNode): mumlNode =
   if not muml.hasKey("content"):
     raise newException(Exception, "no content")
