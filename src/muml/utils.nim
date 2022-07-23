@@ -83,3 +83,24 @@ proc getRGB* (muml: mumlNode): seq[mumlRGB] =
       color.color = newRGB(red.tBinaryRange, green.tBinaryRange, blue.tBinaryRange)
       result.add color
   else: raise newException(Exception, "invalid value")
+
+proc getFilters* (muml: mumlNode): seq[mumlFilter] =
+  result = @[]
+  case muml.kind:
+  of JArray:
+    for item in muml:
+      for key, value in item:
+        case key:
+        of "colorInversion":
+          result.add mumlFilter(
+            kind: colorInversion,
+            red: value["red"].getBool,
+            green: value["green"].getBool,
+            blue: value["blue"].getBool
+          )
+        of "grayScale":
+          result.add mumlFilter(
+            kind: grayScale,
+            value: value["value"].getFloat
+          )
+  else: raise newException(Exception, "invalid value")

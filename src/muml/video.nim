@@ -20,7 +20,10 @@ proc getVideo* (muml: mumlNode): mumlObject =
         of "position": result.video.position = val2.getPosition
         of "scale": result.video.scale = val2.getScale
         of "rotate": result.video.rotate = val2.getNumberValue
-        of "opacity": result.video.opacity = val2.getNumberValue
+        of "opacity":
+          result.video.opacity = val2.getNumberValue
+        of "filters":
+          result.video.filters = val2.getFilters
     of "audio":
       for key2, val2 in val.pairs:
         case key2:

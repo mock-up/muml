@@ -1,5 +1,5 @@
-import json, muml/[types, utils, video, rectangle]
-export types, utils, video, rectangle
+import json, muml/[types, utils, video, rectangle, header, text, triangle], uuids
+export types, utils, video, rectangle, header, text, uuids, triangle
 
 proc muml* (path: string): mumlNode =
   let json = path.readFile().parseJson
@@ -35,8 +35,11 @@ proc `[]`* (muml: mumlNode, index: int): mumlObject {.inline.} =
 
 iterator element* (muml: mumlNode): mumlObject =
   for elem in muml.items:
-    yield case elem.type:
+    var mumlObj = case elem.type:
       of "video": getVideo(elem)
+      of "triangle": getTriangle(elem)
       of "rectangle": getRectangle(elem)
-      else: mumlObject()
-      # else: raise newException(Exception, "not found tag")
+      of "text": getText(elem)
+      else: raise newException(Exception, "not found tag")
+    mumlObj.uuid = genUuid()
+    yield mumlObj

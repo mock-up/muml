@@ -1,5 +1,5 @@
 import unittest, muml
-
+#[
 suite "to parse a simple video":
   let
     content = muml("tests/assets/muml_video.json").content
@@ -41,3 +41,4 @@ suite "to parse a video includes animations":
   
   test "get video-position of video":
     check video.video.position[0].frame.start == 0.0
+]#

@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.1.0"
+version       = "0.0.1"
 author        = "Mutsuha Asada"
 description   = "mock up markup language parser"
 license       = "MIT"
@@ -11,3 +11,4 @@ srcDir        = "src"
 
 requires "nim >= 1.4.8"
 requires "Palette >= 0.2.0"
+requires "uuids >= 0.1.11"
