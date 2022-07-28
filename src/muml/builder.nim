@@ -1,7 +1,6 @@
 import std/[random, macros, json]
 import types, utils, getValueUtils
-
-{.experimental: "dynamicBindSym".}
+export getInt, getFloat, getStr, pairs
 
 type mumlRootObj* = ref object of RootObj
 
@@ -10,7 +9,7 @@ proc serialize (typedescNimNode: NimNode, rootType: bool): JsonNode {.compileTim
   let typeImpl = typedescNimNode.getImpl
   if (typeImpl[2].kind != nnkRefTy) and (typeImpl[2][0].kind != nnkObjectTy) and rootType:
     error("mumlElementになり得る型は構造体（object）型に限られます", typedescNimNode)
-  result["type"] = %* typedescNimNode.repr
+  result["type"] = %* $typedescNimNode
   if typeImpl[2][0].kind == nnkObjectTy:
     let typeImplFields = typeImpl[2][0][2]
     for typeImplField in typeImplFields:
@@ -23,7 +22,7 @@ proc serialize (typedescNimNode: NimNode, rootType: bool): JsonNode {.compileTim
       else:
         result[$fieldName] = serialize(typeName, false)
   elif typeImpl[2].kind == nnkEnumTy:
-    result = %* ("enum:" & typedescNimNode.repr)
+    result = %* ("enum:" & $typedescNimNode)
 
 var randObject {.compileTime.} = initRand(20031030)
 
@@ -125,12 +124,9 @@ proc generateParserProc (procName, typeName: NimNode, json: JsonNode): NimNode {
     newIdentNode("resultElement_" & $keyValueID)
   )
 
-macro mumlBuilder* (mumlElements: varargs[untyped]): untyped =
-  result = newStmtList()
-  for mumlElement in mumlElements:
-    let
-      typeName = ident(mumlElement.repr)
-      procName = ident("parse_" & mumlElement.repr)
-      serializedMumlElement = serialize(bindSym(mumlElement), true)
-    
-    result.add generateParserProc(procName, typeName, serializedMumlElement)
+macro mumlBuilder* (mumlElement: typedesc): untyped =
+  let
+    typeName = ident($mumlElement)
+    procName = ident("parse_" & $mumlElement)
+    serializedMumlElement = serialize(mumlElement, true)
+  result = generateParserProc(procName, typeName, serializedMumlElement)
