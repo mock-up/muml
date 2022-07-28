@@ -1,0 +1,6 @@
+muml	muml.html#muml,string	muml: muml(path: string): mumlNode	
+muml	muml.html#muml,JsonNode	muml: muml(json: JsonNode): mumlNode	
+header	muml.html#header,mumlNode	muml: header(muml: mumlNode): mumlNode	
+content	muml.html#content,mumlNode	muml: content(muml: mumlNode): mumlNode	
+`[]`	muml.html#[],mumlNode,int	muml: `[]`(muml: mumlNode; index: int): mumlObject	
+element	muml.html#element.i,mumlNode	muml: element(muml: mumlNode): mumlObject	
