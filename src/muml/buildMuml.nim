@@ -1,7 +1,9 @@
-import std/[random, macros, json, strutils]
+import std/[random, macros, json]
 import types, utils
 
 {.experimental: "dynamicBindSym".}
+
+type mumlRootObj* = ref object of RootObj
 
 proc serialize (typedescNimNode: NimNode, rootType: bool): JsonNode {.compileTime.} =
   result = %*{}
@@ -25,12 +27,12 @@ proc serialize (typedescNimNode: NimNode, rootType: bool): JsonNode {.compileTim
 
 var randObject {.compileTime.} = initRand(20031030)
 
-proc parseIntField (deserializeKey, loopVal: string): seq[NimNode] =
+proc parseIntField (deserializeKey, resultName, loopVal: string): seq[NimNode] =
   result = @[
     newLit(deserializeKey),
     nnkAsgn.newTree(
       nnkDotExpr.newTree(
-        newIdentNode("resultElement"),
+        newIdentNode(resultName),
         newIdentNode(deserializeKey)
       ),
       nnkDotExpr.newTree(
@@ -40,12 +42,12 @@ proc parseIntField (deserializeKey, loopVal: string): seq[NimNode] =
     )
   ]
 
-proc parseFloatField (deserializeKey, loopVal: string): seq[NimNode] =
+proc parseFloatField (deserializeKey, resultName, loopVal: string): seq[NimNode] =
   result = @[
     newLit(deserializeKey),
     nnkAsgn.newTree(
       nnkDotExpr.newTree(
-        newIdentNode("resultElement"),
+        newIdentNode(resultName),
         newIdentNode(deserializeKey)
       ),
       nnkDotExpr.newTree(
@@ -55,12 +57,12 @@ proc parseFloatField (deserializeKey, loopVal: string): seq[NimNode] =
     )
   ]
 
-proc parseStringField (deserializeKey, loopVal: string): seq[NimNode] =
+proc parseStringField (deserializeKey, resultName, loopVal: string): seq[NimNode] =
   result = @[
     newLit(deserializeKey),
     nnkAsgn.newTree(
       nnkDotExpr.newTree(
-        newIdentNode("resultElement"),
+        newIdentNode(resultName),
         newIdentNode(deserializeKey)
       ),
       nnkDotExpr.newTree(
@@ -73,12 +75,12 @@ proc parseStringField (deserializeKey, loopVal: string): seq[NimNode] =
     )
   ]
 
-proc parseEnumField (deserializeKey, typeName, loopVal: string): seq[NimNode] =
+proc parseEnumField (deserializeKey, typeName, resultName, loopVal: string): seq[NimNode] =
   result = @[
     newLit(deserializeKey),
     nnkAsgn.newTree(
       nnkDotExpr.newTree(
-        newIdentNode("resultElement"),
+        newIdentNode(resultName),
         newIdentNode(deserializeKey)
       ),
       nnkCall.newTree(
@@ -97,94 +99,103 @@ proc parseEnumField (deserializeKey, typeName, loopVal: string): seq[NimNode] =
     )
   ]
 
-proc generateParser (procName, typeName: NimNode, json: JsonNode): NimNode {.compileTime.} =
+proc generateParser (prevAST: NimNode, keyValueID: int, deserializeMap: JsonNode): NimNode {.compileTime.} =
+  ## of節以降を生成する、ネストしたオブジェクトがある場合はfor文、case節までを生成する
+  result = prevAST
+
+  let val = "val_" & $keyValueID
+  var objectTypeName = ""
+
+  for deserializeKey, deserializeVal in deserializeMap.pairs:
+    if deserializeKey == "type":
+      objectTypeName = deserializeVal.getStr.removeDoubleQuotation
+      continue
+
+    if deserializeVal.kind == JString:
+      ### of節を生成する
+      case deserializeVal.getStr
+      of "int":
+        result.add nnkOfBranch.newTree(parseIntField(deserializeKey, "resultElement_" & $keyValueID, val))
+      of "float":
+        result.add nnkOfBranch.newTree(parseFloatField(deserializeKey, "resultElement_" & $keyValueID, val))
+      of "string":
+        result.add nnkOfBranch.newTree(parseStringField(deserializeKey, "resultElement_" & $keyValueID, val))
+      else:
+        if deserializeVal.getStr[0..4] == "enum:":
+          result.add nnkOfBranch.newTree(parseEnumField(deserializeKey, deserializeVal.getStr, "resultElement_" & $keyValueID, val))
+    
+    elif deserializeVal.kind == JObject:
+      ### ネストしたオブジェクトのためにforとcaseを生成する
+      let
+        nextKeyValueID = randObject.rand(1000000)
+        nextResultElement = "resultElement_" & $nextKeyValueID
+      result.add nnkOfBranch.newTree(
+        newLit(deserializeKey),
+        nnkStmtList.newTree(
+          nnkVarSection.newTree(
+            nnkIdentDefs.newTree(
+              newIdentNode(nextResultElement),
+              newEmptyNode(),
+              nnkCall.newTree(
+                newIdentNode(deserializeVal["type"].getStr.removeDoubleQuotation)
+              )
+            )
+          ),
+          nnkForStmt.newTree(
+            newIdentNode("key_" & $nextKeyValueID),
+            newIdentNode("val_" & $nextKeyValueID),
+            nnkDotExpr.newTree(
+              newIdentNode("val_" & $keyValueID),
+              newIdentNode("pairs")
+            ),
+            nnkStmtList.newTree(
+              nnkCaseStmt.newTree(
+                newIdentNode("key_" & $nextKeyValueID)
+              )
+            )
+          )
+        )
+      )
+      result[^1][^1][^1][^1][^1] = generateParser(result[^1][^1][^1][^1][^1], nextKeyValueID, deserializeVal)      
+      result[^1][^1].add nnkAsgn.newTree(
+        nnkDotExpr.newTree(
+          newIdentNode("resultElement_" & $keyValueID),
+          newIdentNode(deserializeKey)
+        ),
+        newIdentNode(nextResultElement)
+      )
+
+proc generateParserProc (procName, typeName: NimNode, json: JsonNode): NimNode {.compileTime.} =
   let
     keyValueID = randObject.rand(1000000)
     key = ident("key_" & $keyValueID)
     val = ident("val_" & $keyValueID)
-    resultElement = ident"resultElement"
+    resultElement = ident("resultElement_" & $keyValueID)
 
   result = quote do:
     proc `procName`* (muml: mumlNode): mumlRootObj =
       var `resultElement` = `typeName`()
       for `key`, `val` in muml.pairs:
-        case `key`
-        of "demo":
-          discard
-        else:
-          discard
+        discard
   
-  # 上記コードの`discard`文を置換
+  # prevASTの`discard`文を置換
   result[^1][^1][^1] = nnkCaseStmt.newTree(
     newIdentNode("key_" & $keyValueID)
   )
   
-  for deserializeKey, deserializeVal in json.pairs:
-    if deserializeKey == "type":
-      continue
-
-    if deserializeVal.kind == JString:
-      echo deserializeVal.getStr
-      case deserializeVal.getStr
-      of "int":
-        result[^1][^1][^1].add nnkOfBranch.newTree(parseIntField(deserializeKey, "val_" & $keyValueID))
-      of "float":
-        result[^1][^1][^1].add nnkOfBranch.newTree(parseFloatField(deserializeKey, "val_" & $keyValueID))
-      of "string":
-        result[^1][^1][^1].add nnkOfBranch.newTree(parseStringField(deserializeKey, "val_" & $keyValueID))
-      else:
-        if deserializeVal.getStr[0..4] == "enum:":
-          result[^1][^1][^1].add nnkOfBranch.newTree(parseEnumField(deserializeKey, deserializeVal.getStr, "val_" & $keyValueID))
-    elif deserializeVal.kind == JObject:
-      discard # generateParser(newStmtList(), val)
+  result[^1][^1][^1] = generateParser(result[^1][^1][^1], keyValueID, json)
 
   result[^1].add nnkAsgn.newTree(
     newIdentNode("result"),
-    newIdentNode("resultElement")
+    newIdentNode("resultElement_" & $keyValueID)
   )
 
-  dumpAstGen:
-    parseEnum[ty](removeDoubleQuotation(val.getStr))
-
-macro mumlBuilder (mumlElements: varargs[untyped]): untyped =
+macro mumlBuilder* (mumlElements: varargs[untyped]): untyped =
   result = newStmtList()
   for mumlElement in mumlElements:
     let
       typeName = ident(mumlElement.repr)
       procName = ident("parse_" & mumlElement.repr)
       serializedMumlElement = serialize(bindSym(mumlElement), true)
-
-    echo serializedMumlElement
     
-    result.add generateParser(procName, typeName, serializedMumlElement)
-
-
-type
-  mumlRootObj = ref object of RootObj
-  myObj = ref object of mumlRootObj
-    myField1: bool
-
-  myEnum = enum
-    m1, m2, m3
-
-  newElement = ref object of mumlRootObj
-    field1: int
-    field2: string
-    field3: myObj
-    field4: float
-    field5: myEnum
-
-expandMacros:
-  mumlBuilder(newElement)
-
-let muml = %* {
-  "field1": 10,
-  "field2": "str",
-  "field3": {
-    "myField1": true
-  },
-  "field4": 12.3,
-  "field5": "m3"
-}
-
-echo parse_newElement(muml).repr
+    result.add generateParserProc(procName, typeName, serializedMumlElement)
