@@ -1,5 +1,5 @@
 import std/[random, macros, json]
-import types, utils
+import types, utils, getValueUtils
 
 {.experimental: "dynamicBindSym".}
 
@@ -27,83 +27,10 @@ proc serialize (typedescNimNode: NimNode, rootType: bool): JsonNode {.compileTim
 
 var randObject {.compileTime.} = initRand(20031030)
 
-proc parseIntField (deserializeKey, resultName, loopVal: string): seq[NimNode] =
-  result = @[
-    newLit(deserializeKey),
-    nnkAsgn.newTree(
-      nnkDotExpr.newTree(
-        newIdentNode(resultName),
-        newIdentNode(deserializeKey)
-      ),
-      nnkDotExpr.newTree(
-        newIdentNode(loopVal),
-        newIdentNode("getInt")
-      )
-    )
-  ]
-
-proc parseFloatField (deserializeKey, resultName, loopVal: string): seq[NimNode] =
-  result = @[
-    newLit(deserializeKey),
-    nnkAsgn.newTree(
-      nnkDotExpr.newTree(
-        newIdentNode(resultName),
-        newIdentNode(deserializeKey)
-      ),
-      nnkDotExpr.newTree(
-        newIdentNode(loopVal),
-        newIdentNode("getFloat")
-      )
-    )
-  ]
-
-proc parseStringField (deserializeKey, resultName, loopVal: string): seq[NimNode] =
-  result = @[
-    newLit(deserializeKey),
-    nnkAsgn.newTree(
-      nnkDotExpr.newTree(
-        newIdentNode(resultName),
-        newIdentNode(deserializeKey)
-      ),
-      nnkDotExpr.newTree(
-        nnkDotExpr.newTree(
-          newIdentNode(loopVal),
-          newIdentNode("getStr")
-        ),
-        newIdentNode("removeDoubleQuotation")
-      )
-    )
-  ]
-
-proc parseEnumField (deserializeKey, typeName, resultName, loopVal: string): seq[NimNode] =
-  result = @[
-    newLit(deserializeKey),
-    nnkAsgn.newTree(
-      nnkDotExpr.newTree(
-        newIdentNode(resultName),
-        newIdentNode(deserializeKey)
-      ),
-      nnkCall.newTree(
-        nnkBracketExpr.newTree(
-          newIdentNode("parseEnum"),
-          newIdentNode(typeName[5..^1])
-        ),
-        nnkCall.newTree(
-          newIdentNode("removeDoubleQuotation"),
-          nnkDotExpr.newTree(
-            newIdentNode(loopVal),
-            newIdentNode("getStr")
-          )
-        )
-      )
-    )
-  ]
-
 proc generateParser (prevAST: NimNode, keyValueID: int, deserializeMap: JsonNode): NimNode {.compileTime.} =
   ## of節以降を生成する、ネストしたオブジェクトがある場合はfor文、case節までを生成する
   result = prevAST
-
-  let val = "val_" & $keyValueID
+  
   var objectTypeName = ""
 
   for deserializeKey, deserializeVal in deserializeMap.pairs:
@@ -115,14 +42,22 @@ proc generateParser (prevAST: NimNode, keyValueID: int, deserializeMap: JsonNode
       ### of節を生成する
       case deserializeVal.getStr
       of "int":
-        result.add nnkOfBranch.newTree(parseIntField(deserializeKey, "resultElement_" & $keyValueID, val))
+        result.add nnkOfBranch.newTree(
+          getValue(int, deserializeKey, keyValueID)
+        )
       of "float":
-        result.add nnkOfBranch.newTree(parseFloatField(deserializeKey, "resultElement_" & $keyValueID, val))
+        result.add nnkOfBranch.newTree(
+          getValue(float, deserializeKey, keyValueID)
+        )
       of "string":
-        result.add nnkOfBranch.newTree(parseStringField(deserializeKey, "resultElement_" & $keyValueID, val))
+        result.add nnkOfBranch.newTree(
+          getValue(string, deserializeKey, keyValueID)
+        )
       else:
         if deserializeVal.getStr[0..4] == "enum:":
-          result.add nnkOfBranch.newTree(parseEnumField(deserializeKey, deserializeVal.getStr, "resultElement_" & $keyValueID, val))
+          result.add nnkOfBranch.newTree(
+            getValue(enum, deserializeKey, deserializeVal.getStr, keyValueID)
+          )
     
     elif deserializeVal.kind == JObject:
       ### ネストしたオブジェクトのためにforとcaseを生成する
@@ -173,7 +108,7 @@ proc generateParserProc (procName, typeName: NimNode, json: JsonNode): NimNode {
     resultElement = ident("resultElement_" & $keyValueID)
 
   result = quote do:
-    proc `procName`* (muml: mumlNode): mumlRootObj =
+    proc `procName` (muml: mumlNode): mumlRootObj =
       var `resultElement` = `typeName`()
       for `key`, `val` in muml.pairs:
         discard
