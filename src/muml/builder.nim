@@ -2,8 +2,6 @@ import std/[random, macros, json]
 import types, utils, getValueUtils
 export getInt, getFloat, getStr, pairs
 
-type mumlRootObj* = ref object of RootObj
-
 proc serialize (typedescNimNode: NimNode, rootType: bool): JsonNode {.compileTime.} =
   result = %*{}
   let typeImpl = typedescNimNode.getImpl

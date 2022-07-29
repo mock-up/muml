@@ -37,9 +37,12 @@ iterator element* (muml: mumlNode): mumlObject =
   for elem in muml.items:
     var mumlObj = case elem.type:
       of "video": getVideo(elem)
-      of "triangle": getTriangle(elem)
       of "rectangle": getRectangle(elem)
       of "text": getText(elem)
       else: raise newException(Exception, "not found tag")
     mumlObj.uuid = genUuid()
     yield mumlObj
+
+iterator deserialize* (muml: JSONNode): mumlRootObj =
+  for element in muml.items:
+    discard

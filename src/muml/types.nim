@@ -3,6 +3,9 @@ import json, Palette/color, uuids
 type
   mumlNode* = JsonNode
 
+  mumlRootObj* = ref object of RootObj
+    default_content: string
+
   mumlKind* = enum
     mumlKindVideo
     mumlKindAudio

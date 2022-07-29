@@ -1,18 +1,31 @@
-import json, types, utils
+import json, types
+import builder
 
-proc getTriangle* (muml: mumlNode): mumlObject =
-  result = mumlObject(kind: mumlKindTriangle)
-  for key, val in muml.pairs:
-    case key:
-    of "frame":
-      result.frame.start = val["start"].getInt
-      result.frame.`end` = val["end"].getInt
-    of "layer": result.layer = val.getInt
-    of "position": result.triangle.position = val.getPosition
-    of "width": result.triangle.width = val.getNumberValue
-    of "height": result.triangle.height = val.getNumberValue
-    of "scale": result.triangle.scale = val.getScale
-    of "rotate": result.triangle.rotate = val.getNumberValue
-    of "color":
-      result.triangle.color = val.getRGB
-    of "opacity": result.triangle.opacity = val.getNumberValue
+type
+  mumlFrame = ref object of mumlRootObj
+    start: int
+    stop: int
+  
+  mumlPosition = ref object of mumlRootObj
+    x: float
+    y: float
+    z: float
+  
+  mumlScale = ref object of mumlRootObj
+    width: float
+    height: float
+
+  # 一旦colorとanimationは無視している
+  mumlTriangle = ref object of mumlRootObj
+    frame: mumlFrame
+    layer: int
+    position: mumlPosition
+    width: float
+    height: float
+    scale: mumlScale
+    rotate: float
+    opacity: float
+
+mumlBuilder(mumlTriangle)
+
+export parse_mumlTriangle
