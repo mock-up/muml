@@ -135,7 +135,12 @@ window.addEventListener('DOMContentLoaded', main);
 <li>
   <a class="reference reference-toplevel" href="#15" id="65">Iterators</a>
   <ul class="simple simple-toc-section">
-      <ul class="simple nested-toc-section">element
+      <ul class="simple nested-toc-section">deserialize
+      <li><a class="reference" href="#deserialize.i%2CJsonNode"
+    title="deserialize(muml: JsonNode): mumlRootObj">deserialize(muml: JsonNode): mumlRootObj</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">element
       <li><a class="reference" href="#element.i%2CmumlNode"
     title="element(muml: mumlNode): mumlObject">element(muml: mumlNode): mumlObject</a></li>
 
@@ -213,6 +218,14 @@ window.addEventListener('DOMContentLoaded', main);
 <div class="section" id="15">
 <h1><a class="toc-backref" href="#15">Iterators</a></h1>
 <dl class="item">
+<div id="deserialize.i,JsonNode">
+<dt><pre><span class="Keyword">iterator</span> <a href="#deserialize.i%2CJsonNode"><span class="Identifier">deserialize</span></a><span class="Other">(</span><span class="Identifier">muml</span><span class="Other">:</span> <span class="Identifier">JsonNode</span><span class="Other">)</span><span class="Other">:</span> <a href="muml/types.html#mumlRootObj"><span class="Identifier">mumlRootObj</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+
+</dd>
+</div>
 <div id="element.i,mumlNode">
 <dt><pre><span class="Keyword">iterator</span> <a href="#element.i%2CmumlNode"><span class="Identifier">element</span></a><span class="Other">(</span><span class="Identifier">muml</span><span class="Other">:</span> <a href="muml/types.html#mumlNode"><span class="Identifier">mumlNode</span></a><span class="Other">)</span><span class="Other">:</span> <a href="muml/types.html#mumlObject"><span class="Identifier">mumlObject</span></a> {.
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">KeyError</span><span class="Other">,</span> <span class="Identifier">OSError</span><span class="Other">,</span> <span class="Identifier">IOError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">]</span></span>.}</pre></dt>
@@ -227,7 +240,7 @@ window.addEventListener('DOMContentLoaded', main);
 <div class="section" id="19">
 <h1><a class="toc-backref" href="#19">Exports</a></h1>
 <dl class="item">
-<a href="muml/types.html#mumlObject"><span class="Identifier">mumlObject</span></a>, <a href="muml/types.html#mumlIntRange"><span class="Identifier">mumlIntRange</span></a>, <a href="muml/types.html#mumlTriangle"><span class="Identifier">mumlTriangle</span></a>, <a href="muml/types.html#mumlFloatRange"><span class="Identifier">mumlFloatRange</span></a>, <a href="muml/types.html#mumlValue"><span class="Identifier">mumlValue</span></a>, <a href="muml/types.html#mumlRectangle"><span class="Identifier">mumlRectangle</span></a>, <a href="muml/types.html#mumlText"><span class="Identifier">mumlText</span></a>, <a href="muml/types.html#mumlFilterKind"><span class="Identifier">mumlFilterKind</span></a>, <a href="muml/types.html#muml2DPosition"><span class="Identifier">muml2DPosition</span></a>, <a href="muml/types.html#mumlFilter"><span class="Identifier">mumlFilter</span></a>, <a href="muml/types.html#mumlHeader"><span class="Identifier">mumlHeader</span></a>, <a href="muml/types.html#mumlVideo_Audio"><span class="Identifier">mumlVideo_Audio</span></a>, <a href="muml/types.html#mumlNode"><span class="Identifier">mumlNode</span></a>, <a href="muml/types.html#mumlScale"><span class="Identifier">mumlScale</span></a>, <a href="muml/types.html#mumlRGB"><span class="Identifier">mumlRGB</span></a>, <a href="muml/types.html#mumlKind"><span class="Identifier">mumlKind</span></a>, <a href="muml/types.html#mumlVideo_Video"><span class="Identifier">mumlVideo_Video</span></a>, <a href="muml/types.html#mumlAudioBalance"><span class="Identifier">mumlAudioBalance</span></a>, <a href="muml/utils.html#getScale,mumlNode"><span class="Identifier">getScale</span></a>, <a href="muml/utils.html#getFloatValueProperty,mumlNode,string"><span class="Identifier">getFloatValueProperty</span></a>, <a href="muml/utils.html#getRGB,mumlNode"><span class="Identifier">getRGB</span></a>, <a href="muml/utils.html#removeDoubleQuotation,string"><span class="Identifier">removeDoubleQuotation</span></a>, <a href="muml/utils.html#getNumberValue,mumlNode"><span class="Identifier">getNumberValue</span></a>, <a href="muml/utils.html#getPosition,mumlNode"><span class="Identifier">getPosition</span></a>, <a href="muml/utils.html#getFilters,mumlNode"><span class="Identifier">getFilters</span></a>, <a href="muml/utils.html#getFrame,mumlNode"><span class="Identifier">getFrame</span></a>, <a href="muml/video.html#getVideo,mumlNode"><span class="Identifier">getVideo</span></a>, <a href="muml/rectangle.html#getRectangle,mumlNode"><span class="Identifier">getRectangle</span></a>, <a href="muml/header.html#getHeader,mumlNode"><span class="Identifier">getHeader</span></a>, <a href="muml/text.html#getText,mumlNode"><span class="Identifier">getText</span></a>, <a href="muml/triangle.html#getTriangle,mumlNode"><span class="Identifier">getTriangle</span></a>
+<a href="muml/types.html#mumlRGB"><span class="Identifier">mumlRGB</span></a>, <a href="muml/types.html#mumlIntRange"><span class="Identifier">mumlIntRange</span></a>, <a href="muml/types.html#mumlObject"><span class="Identifier">mumlObject</span></a>, <a href="muml/types.html#mumlFloatRange"><span class="Identifier">mumlFloatRange</span></a>, <a href="muml/types.html#mumlValue"><span class="Identifier">mumlValue</span></a>, <a href="muml/types.html#mumlRectangle"><span class="Identifier">mumlRectangle</span></a>, <a href="muml/types.html#mumlText"><span class="Identifier">mumlText</span></a>, <a href="muml/types.html#mumlFilterKind"><span class="Identifier">mumlFilterKind</span></a>, <a href="muml/types.html#mumlRootObj"><span class="Identifier">mumlRootObj</span></a>, <a href="muml/types.html#muml2DPosition"><span class="Identifier">muml2DPosition</span></a>, <a href="muml/types.html#mumlFilter"><span class="Identifier">mumlFilter</span></a>, <a href="muml/types.html#mumlTriangle"><span class="Identifier">mumlTriangle</span></a>, <a href="muml/types.html#mumlHeader"><span class="Identifier">mumlHeader</span></a>, <a href="muml/types.html#mumlVideo_Audio"><span class="Identifier">mumlVideo_Audio</span></a>, <a href="muml/types.html#mumlNode"><span class="Identifier">mumlNode</span></a>, <a href="muml/types.html#mumlScale"><span class="Identifier">mumlScale</span></a>, <a href="muml/types.html#mumlKind"><span class="Identifier">mumlKind</span></a>, <a href="muml/types.html#mumlVideo_Video"><span class="Identifier">mumlVideo_Video</span></a>, <a href="muml/types.html#mumlAudioBalance"><span class="Identifier">mumlAudioBalance</span></a>, <a href="muml/utils.html#getScale,mumlNode"><span class="Identifier">getScale</span></a>, <a href="muml/utils.html#getFloatValueProperty,mumlNode,string"><span class="Identifier">getFloatValueProperty</span></a>, <a href="muml/utils.html#getRGB,mumlNode"><span class="Identifier">getRGB</span></a>, <a href="muml/utils.html#removeDoubleQuotation,string"><span class="Identifier">removeDoubleQuotation</span></a>, <a href="muml/utils.html#getNumberValue,mumlNode"><span class="Identifier">getNumberValue</span></a>, <a href="muml/utils.html#getPosition,mumlNode"><span class="Identifier">getPosition</span></a>, <a href="muml/utils.html#getFilters,mumlNode"><span class="Identifier">getFilters</span></a>, <a href="muml/utils.html#getFrame,mumlNode"><span class="Identifier">getFrame</span></a>, <a href="muml/video.html#getVideo,mumlNode"><span class="Identifier">getVideo</span></a>, <a href="muml/rectangle.html#getRectangle,mumlNode"><span class="Identifier">getRectangle</span></a>, <a href="muml/header.html#getHeader,mumlNode"><span class="Identifier">getHeader</span></a>, <a href="muml/text.html#getText,mumlNode"><span class="Identifier">getText</span></a>, <a href="muml/triangle.html#parse_mumlTriangle,mumlNode"><span class="Identifier">parse_mumlTriangle</span></a>
 </dl></div>
 
   </div>
@@ -237,7 +250,7 @@ window.addEventListener('DOMContentLoaded', main);
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2022-07-28 18:32:51 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2022-07-29 06:33:12 UTC</small>
       </div>
     </div>
   </div>

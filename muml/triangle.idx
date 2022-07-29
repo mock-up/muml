@@ -1,1 +1,1 @@
-getTriangle	muml/triangle.html#getTriangle,mumlNode	triangle: getTriangle(muml: mumlNode): mumlObject	
+parse_mumlTriangle	muml/triangle.html#parse_mumlTriangle,mumlNode	triangle: parse_mumlTriangle(muml`gensym0: mumlNode): mumlRootObj	

@@ -4,3 +4,4 @@ header	muml.html#header,mumlNode	muml: header(muml: mumlNode): mumlNode
 content	muml.html#content,mumlNode	muml: content(muml: mumlNode): mumlNode	
 `[]`	muml.html#[],mumlNode,int	muml: `[]`(muml: mumlNode; index: int): mumlObject	
 element	muml.html#element.i,mumlNode	muml: element(muml: mumlNode): mumlObject	
+deserialize	muml.html#deserialize.i,JsonNode	muml: deserialize(muml: JsonNode): mumlRootObj	

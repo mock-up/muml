@@ -70,7 +70,7 @@ window.addEventListener('DOMContentLoaded', main);
 <div class="document" id="documentId">
   <div class="container">
     <h1 class="title">Index</h1>
-    Modules: <a href="muml.html">muml</a>, <a href="muml/header.html">muml/header</a>, <a href="muml/rectangle.html">muml/rectangle</a>, <a href="muml/text.html">muml/text</a>, <a href="muml/triangle.html">muml/triangle</a>, <a href="muml/types.html">muml/types</a>, <a href="muml/utils.html">muml/utils</a>, <a href="muml/video.html">muml/video</a>.<br/><p /><h2>API symbols</h2>
+    Modules: <a href="muml.html">muml</a>, <a href="muml/builder.html">muml/builder</a>, <a href="muml/getValueUtils.html">muml/getValueUtils</a>, <a href="muml/header.html">muml/header</a>, <a href="muml/rectangle.html">muml/rectangle</a>, <a href="muml/text.html">muml/text</a>, <a href="muml/triangle.html">muml/triangle</a>, <a href="muml/types.html">muml/types</a>, <a href="muml/utils.html">muml/utils</a>, <a href="muml/video.html">muml/video</a>.<br/><p /><h2>API symbols</h2>
 <dl><dt><a name="%60%5B%5D%60" href="#%60%5B%5D%60"><span>`[]`:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="muml: `[]`(muml: mumlNode; index: int): mumlObject" href="muml.html#%5B%5D%2CmumlNode%2Cint">muml: `[]`(muml: mumlNode; index: int): mumlObject</a></li>
@@ -82,6 +82,10 @@ window.addEventListener('DOMContentLoaded', main);
 <dt><a name="content" href="#content"><span>content:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="muml: content(muml: mumlNode): mumlNode" href="muml.html#content%2CmumlNode">muml: content(muml: mumlNode): mumlNode</a></li>
+          </ul></dd>
+<dt><a name="deserialize" href="#deserialize"><span>deserialize:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="muml: deserialize(muml: JsonNode): mumlRootObj" href="muml.html#deserialize.i%2CJsonNode">muml: deserialize(muml: JsonNode): mumlRootObj</a></li>
           </ul></dd>
 <dt><a name="element" href="#element"><span>element:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -127,9 +131,21 @@ window.addEventListener('DOMContentLoaded', main);
 <li><a class="reference external"
           data-doc-search-tag="text: getText(muml: mumlNode): mumlObject" href="muml/text.html#getText%2CmumlNode">text: getText(muml: mumlNode): mumlObject</a></li>
           </ul></dd>
-<dt><a name="getTriangle" href="#getTriangle"><span>getTriangle:</span></a></dt><dd><ul class="simple">
+<dt><a name="getValue" href="#getValue"><span>getValue:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="triangle: getTriangle(muml: mumlNode): mumlObject" href="muml/triangle.html#getTriangle%2CmumlNode">triangle: getTriangle(muml: mumlNode): mumlObject</a></li>
+          data-doc-search-tag="getValueUtils: getValue(_: typedesc[enum]; typeName, deserializeKey: string; keyValueID: int): seq[
+    NimNode]" href="muml/getValueUtils.html#getValue%2Ctypedesc%5B%5D%2Cstring%2Cstring%2Cint">getValueUtils: getValue(_: typedesc[enum]; typeName, deserializeKey: string; keyValueID: int): seq[
+    NimNode]</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="getValueUtils: getValue(_: typedesc[float]; deserializeKey: string; keyValueID: int): seq[
+    NimNode]" href="muml/getValueUtils.html#getValue%2Ctypedesc%5Bfloat%5D%2Cstring%2Cint">getValueUtils: getValue(_: typedesc[float]; deserializeKey: string; keyValueID: int): seq[
+    NimNode]</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="getValueUtils: getValue(_: typedesc[int]; deserializeKey: string; keyValueID: int): seq[NimNode]" href="muml/getValueUtils.html#getValue%2Ctypedesc%5Bint%5D%2Cstring%2Cint">getValueUtils: getValue(_: typedesc[int]; deserializeKey: string; keyValueID: int): seq[NimNode]</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="getValueUtils: getValue(_: typedesc[string]; deserializeKey: string; keyValueID: int): seq[
+    NimNode]" href="muml/getValueUtils.html#getValue%2Ctypedesc%5Bstring%5D%2Cstring%2Cint">getValueUtils: getValue(_: typedesc[string]; deserializeKey: string; keyValueID: int): seq[
+    NimNode]</a></li>
           </ul></dd>
 <dt><a name="getVideo" href="#getVideo"><span>getVideo:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -156,6 +172,10 @@ window.addEventListener('DOMContentLoaded', main);
 <dt><a name="mumlAudioBalance" href="#mumlAudioBalance"><span>mumlAudioBalance:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="types: mumlAudioBalance" href="muml/types.html#mumlAudioBalance">types: mumlAudioBalance</a></li>
+          </ul></dd>
+<dt><a name="mumlBuilder" href="#mumlBuilder"><span>mumlBuilder:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="builder: mumlBuilder(mumlElement: typedesc): untyped" href="muml/builder.html#mumlBuilder.m%2Ctypedesc">builder: mumlBuilder(mumlElement: typedesc): untyped</a></li>
           </ul></dd>
 <dt><a name="mumlFilter" href="#mumlFilter"><span>mumlFilter:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -217,6 +237,10 @@ window.addEventListener('DOMContentLoaded', main);
 <li><a class="reference external"
           data-doc-search-tag="types: mumlRGB" href="muml/types.html#mumlRGB">types: mumlRGB</a></li>
           </ul></dd>
+<dt><a name="mumlRootObj" href="#mumlRootObj"><span>mumlRootObj:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="types: mumlRootObj" href="muml/types.html#mumlRootObj">types: mumlRootObj</a></li>
+          </ul></dd>
 <dt><a name="mumlScale" href="#mumlScale"><span>mumlScale:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="types: mumlScale" href="muml/types.html#mumlScale">types: mumlScale</a></li>
@@ -241,6 +265,10 @@ window.addEventListener('DOMContentLoaded', main);
 <li><a class="reference external"
           data-doc-search-tag="types: mumlVideo_Video" href="muml/types.html#mumlVideo_Video">types: mumlVideo_Video</a></li>
           </ul></dd>
+<dt><a name="parse_mumlTriangle" href="#parse_mumlTriangle"><span>parse_mumlTriangle:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="triangle: parse_mumlTriangle(muml`gensym0: mumlNode): mumlRootObj" href="muml/triangle.html#parse_mumlTriangle%2CmumlNode">triangle: parse_mumlTriangle(muml`gensym0: mumlNode): mumlRootObj</a></li>
+          </ul></dd>
 <dt><a name="removeDoubleQuotation" href="#removeDoubleQuotation"><span>removeDoubleQuotation:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="utils: removeDoubleQuotation(str: string): string" href="muml/utils.html#removeDoubleQuotation%2Cstring">utils: removeDoubleQuotation(str: string): string</a></li>
@@ -250,7 +278,7 @@ window.addEventListener('DOMContentLoaded', main);
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2022-07-28 18:32:51 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2022-07-29 06:33:12 UTC</small>
       </div>
     </div>
   </div>
