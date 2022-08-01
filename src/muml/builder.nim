@@ -12,6 +12,20 @@ proc parseTypeName (typeNameAST: NimNode): JsonNode {.compileTime.} =
   else:
     result = serialize(typeNameAST, false)
 
+proc serializeObject (prevJson: JsonNode, typeImplFields: NimNode): JsonNode =
+  result = prevJson
+  for typeImplField in typeImplFields:
+    let fieldName = typeImplField[0]
+    expectKind(typeImplField[1], {nnkSym, nnkBracketExpr})
+    case typeImplField[1].kind
+    of nnkSym:
+      result[$fieldName] = parseTypeName(typeImplField[1])
+    of nnkBracketExpr:
+      expectLen(typeImplField[1], 2)
+      expectIdent(typeImplField[1][0], "Animation")
+      result["@" & $fieldName] = parseTypeName(typeImplField[1][1])
+    else: discard
+
 proc serialize (typedescNimNode: NimNode, rootType: bool): JsonNode {.compileTime.} =
   result = %*{}
   let typeImpl = typedescNimNode.getImpl
@@ -21,20 +35,12 @@ proc serialize (typedescNimNode: NimNode, rootType: bool): JsonNode {.compileTim
     expectKind(typeImpl[2][0], nnkObjectTy)
 
   result["type"] = %* $typedescNimNode
-  if typeImpl[2][0].kind == nnkObjectTy:
+  if typeImpl[2].kind == nnkObjectTy:
+    let typeImplFields = typeImpl[2][2]
+    result = serializeObject(result, typeImplFields)
+  elif typeImpl[2][0].kind == nnkObjectTy:
     let typeImplFields = typeImpl[2][0][2]
-    for typeImplField in typeImplFields:
-      let fieldName = typeImplField[0]
-      expectKind(typeImplField[1], {nnkSym, nnkBracketExpr})
-      case typeImplField[1].kind
-      of nnkSym:
-        result[$fieldName] = parseTypeName(typeImplField[1])
-      of nnkBracketExpr:
-        expectLen(typeImplField[1], 2)
-        expectIdent(typeImplField[1][0], "Animation")
-        result["@" & $fieldName] = parseTypeName(typeImplField[1][1])
-      else: discard
-          
+    result = serializeObject(result, typeImplFields)
   elif typeImpl[2].kind == nnkEnumTy:
     result = %* ("enum:" & $typedescNimNode)
 
@@ -82,7 +88,7 @@ proc generateParser (prevAST: NimNode, keyValueID: int, deserializeMap: JsonNode
                 discard
         )
         result[^1][^1][^1][^1][^1][0] = nnkCaseStmt.newTree(nextKey)
-        result[^1][^1][^1][^1][^1].add generateParser(result[^1][^1][^1][^1][^1][0], nextKeyValueID, deserializeVal)
+        result[^1][^1][^1][^1][^1][^1] = generateParser(result[^1][^1][^1][^1][^1][0], nextKeyValueID, deserializeVal)
         result[^1][^1][^1].add quote do:
           `currentResultElement`.`field`.add `nextResultElement`
 
@@ -123,7 +129,7 @@ proc generateParser (prevAST: NimNode, keyValueID: int, deserializeMap: JsonNode
             discard
       )
       result[^1][^1][^1][^1][0] = nnkCaseStmt.newTree(nextKey)
-      result[^1][^1][^1][^1].add generateParser(result[^1][^1][^1][^1][0], nextKeyValueID, deserializeVal)
+      result[^1][^1][^1][^1][^1] = generateParser(result[^1][^1][^1][^1][0], nextKeyValueID, deserializeVal)
       result[^1][^1].add quote do:
         `currentResultElement`.`field` = `nextResultElement`
 
@@ -135,7 +141,7 @@ proc generateParserProc (procName, typeName: NimNode, json: JsonNode): NimNode {
     resultElement = ident("resultElement_" & $keyValueID)
 
   result = quote do:
-    proc `procName`* (muml: mumlNode): mumlRootObj =
+    proc `procName`* (muml: mumlNode): mumlRootElement =
       var `resultElement` = `typeName`()
       for `key`, `val` in muml.pairs:
         discard
