@@ -5,6 +5,8 @@ type
 
   mumlRootObj* = ref object of RootObj
     default_content: string
+  
+  Animation* [T] = seq[T]
 
   mumlKind* = enum
     mumlKindVideo

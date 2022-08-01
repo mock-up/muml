@@ -59,3 +59,35 @@ proc getValue* (_: typedesc[enum], typeName, deserializeKey: string, keyValueID:
       )
     )
   )
+
+func toIdent (deserializeKey: string, keyValueID: int): tuple[val, resultElement, key: NimNode] =
+  result.val = newIdentNode("val_" & $keyValueID)
+  result.resultElement = newIdentNode("resultElement_" & $keyValueID)
+  result.key = newIdentNode(deserializeKey)
+
+proc getFloatSequenceParserAST* (deserializeKey: string, keyValueID: int): NimNode =
+  let (val, resultElement, key) = toIdent(deserializeKey, keyValueID)
+  result = nnkOfBranch.newTree(
+    newLit(deserializeKey),
+    quote do:
+      for jsonArrayElement in `val`:
+        `resultElement`.`key`.add jsonArrayElement.getFloat
+  )
+
+proc getIntSequenceParserAST* (deserializeKey: string, keyValueID: int): NimNode =
+  let (val, resultElement, key) = toIdent(deserializeKey, keyValueID)
+  result = nnkOfBranch.newTree(
+    newLit(deserializeKey),
+    quote do:
+      for jsonArrayElement in `val`:
+        `resultElement`.`key`.add jsonArrayElement.getInt
+  )
+
+proc getStringSequenceParserAST* (deserializeKey: string, keyValueID: int): NimNode =
+  let (val, resultElement, key) = toIdent(deserializeKey, keyValueID)
+  result = nnkOfBranch.newTree(
+    newLit(deserializeKey),
+    quote do:
+      for jsonArrayElement in `val`:
+        `resultElement`.`key`.add jsonArrayElement.getStr.removeDoubleQuotation
+  )

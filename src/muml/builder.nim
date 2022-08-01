@@ -2,23 +2,39 @@ import std/[random, macros, json]
 import types, utils, getValueUtils
 export getInt, getFloat, getStr, pairs
 
+proc serialize (typedescNimNode: NimNode, rootType: bool): JsonNode {.compileTime.}
+
+proc parseTypeName (typeNameAST: NimNode): JsonNode {.compileTime.} =
+  expectKind(typeNameAST, nnkSym)
+  const SupportTypes = ["int", "string", "bool", "float"]
+  if $typeNameAST in SupportTypes:
+    result = %* $typeNameAST
+  else:
+    result = serialize(typeNameAST, false)
+
 proc serialize (typedescNimNode: NimNode, rootType: bool): JsonNode {.compileTime.} =
   result = %*{}
   let typeImpl = typedescNimNode.getImpl
-  if (typeImpl[2].kind != nnkRefTy) and (typeImpl[2][0].kind != nnkObjectTy) and rootType:
-    error("mumlElementになり得る型は構造体（object）型に限られます", typedescNimNode)
+
+  if rootType:
+    expectKind(typeImpl[2], nnkRefTy)
+    expectKind(typeImpl[2][0], nnkObjectTy)
+
   result["type"] = %* $typedescNimNode
   if typeImpl[2][0].kind == nnkObjectTy:
     let typeImplFields = typeImpl[2][0][2]
     for typeImplField in typeImplFields:
-      let
-        fieldName = typeImplField[0]
-        typeName = typeImplField[1]
-      case $typeName
-      of "int", "string", "bool", "float", "float32", "float64":
-        result[$fieldName] = %* $typeName
-      else:
-        result[$fieldName] = serialize(typeName, false)
+      let fieldName = typeImplField[0]
+      expectKind(typeImplField[1], {nnkSym, nnkBracketExpr})
+      case typeImplField[1].kind
+      of nnkSym:
+        result[$fieldName] = parseTypeName(typeImplField[1])
+      of nnkBracketExpr:
+        expectLen(typeImplField[1], 2)
+        expectIdent(typeImplField[1][0], "Animation")
+        result["@" & $fieldName] = parseTypeName(typeImplField[1][1])
+      else: discard
+          
   elif typeImpl[2].kind == nnkEnumTy:
     result = %* ("enum:" & $typedescNimNode)
 
@@ -35,26 +51,29 @@ proc generateParser (prevAST: NimNode, keyValueID: int, deserializeMap: JsonNode
       objectTypeName = deserializeVal.getStr.removeDoubleQuotation
       continue
 
-    if deserializeVal.kind == JString:
+    elif deserializeKey[0] == '@':
+      ### アニメーション
+      let typeName = deserializeVal.getStr
+
+      if typeName == "int":
+        result.add getIntSequenceParserAST(deserializeKey[1..^1], keyValueID)
+      elif typeName == "float":
+        result.add getFloatSequenceParserAST(deserializeKey[1..^1], keyValueID)
+      elif typeName == "string":
+        result.add getStringSequenceParserAST(deserializeKey[1..^1], keyValueID)
+
+    elif deserializeVal.kind == JString:
       ### of節を生成する
-      case deserializeVal.getStr
-      of "int":
-        result.add nnkOfBranch.newTree(
-          getValue(int, deserializeKey, keyValueID)
-        )
-      of "float":
-        result.add nnkOfBranch.newTree(
-          getValue(float, deserializeKey, keyValueID)
-        )
-      of "string":
-        result.add nnkOfBranch.newTree(
-          getValue(string, deserializeKey, keyValueID)
-        )
-      else:
-        if deserializeVal.getStr[0..4] == "enum:":
-          result.add nnkOfBranch.newTree(
-            getValue(enum, deserializeKey, deserializeVal.getStr, keyValueID)
-          )
+      let typeName = deserializeVal.getStr
+
+      if typeName == "int":
+        result.add nnkOfBranch.newTree(getValue(int, deserializeKey, keyValueID))
+      elif typeName == "float":
+        result.add nnkOfBranch.newTree(getValue(float, deserializeKey, keyValueID))
+      elif typeName == "string":
+        result.add nnkOfBranch.newTree(getValue(string, deserializeKey, keyValueID))
+      elif typeName.len >= 4 and typeName[0..4] == "enum:":
+        result.add nnkOfBranch.newTree(getValue(enum, deserializeKey, deserializeVal.getStr, keyValueID))
     
     elif deserializeVal.kind == JObject:
       ### ネストしたオブジェクトのためにforとcaseを生成する
@@ -105,7 +124,7 @@ proc generateParserProc (procName, typeName: NimNode, json: JsonNode): NimNode {
     resultElement = ident("resultElement_" & $keyValueID)
 
   result = quote do:
-    proc `procName` (muml: mumlNode): mumlRootObj =
+    proc `procName`* (muml: mumlNode): mumlRootObj =
       var `resultElement` = `typeName`()
       for `key`, `val` in muml.pairs:
         discard
