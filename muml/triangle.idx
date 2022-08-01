@@ -1,1 +1,2 @@
 parse_mumlTriangle	muml/triangle.html#parse_mumlTriangle,mumlNode	triangle: parse_mumlTriangle(muml`gensym0: mumlNode): mumlRootObj	
+parse_mumlTriangle	muml/triangle.html#parse_mumlTriangle,mumlNode_2	triangle: parse_mumlTriangle(muml`gensym0: mumlNode): mumlRootObj	

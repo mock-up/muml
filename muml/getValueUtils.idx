@@ -1,4 +1,8 @@
-getValue	muml/getValueUtils.html#getValue,typedesc[int],string,int	getValueUtils: getValue(_: typedesc[int]; deserializeKey: string; keyValueID: int): seq[NimNode]	
-getValue	muml/getValueUtils.html#getValue,typedesc[float],string,int	getValueUtils: getValue(_: typedesc[float]; deserializeKey: string; keyValueID: int): seq[\n    NimNode]	
-getValue	muml/getValueUtils.html#getValue,typedesc[string],string,int	getValueUtils: getValue(_: typedesc[string]; deserializeKey: string; keyValueID: int): seq[\n    NimNode]	
-getValue	muml/getValueUtils.html#getValue,typedesc[],string,string,int	getValueUtils: getValue(_: typedesc[enum]; typeName, deserializeKey: string; keyValueID: int): seq[\n    NimNode]	
+getIntParserAST	muml/getValueUtils.html#getIntParserAST,string,int	getValueUtils: getIntParserAST(deserializeKey: string; keyValueID: int): NimNode	
+getInt8ParserAST	muml/getValueUtils.html#getInt8ParserAST,string,int	getValueUtils: getInt8ParserAST(deserializeKey: string; keyValueID: int): NimNode	
+getFloatParserAST	muml/getValueUtils.html#getFloatParserAST,string,int	getValueUtils: getFloatParserAST(deserializeKey: string; keyValueID: int): NimNode	
+getStringParserAST	muml/getValueUtils.html#getStringParserAST,string,int	getValueUtils: getStringParserAST(deserializeKey: string; keyValueID: int): NimNode	
+getEnumParserAST	muml/getValueUtils.html#getEnumParserAST,string,string,int	getValueUtils: getEnumParserAST(typeName, deserializeKey: string; keyValueID: int): NimNode	
+getFloatSequenceParserAST	muml/getValueUtils.html#getFloatSequenceParserAST,string,int	getValueUtils: getFloatSequenceParserAST(deserializeKey: string; keyValueID: int): NimNode	
+getIntSequenceParserAST	muml/getValueUtils.html#getIntSequenceParserAST,string,int	getValueUtils: getIntSequenceParserAST(deserializeKey: string; keyValueID: int): NimNode	
+getStringSequenceParserAST	muml/getValueUtils.html#getStringSequenceParserAST,string,int	getValueUtils: getStringSequenceParserAST(deserializeKey: string; keyValueID: int): NimNode	
