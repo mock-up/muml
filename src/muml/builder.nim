@@ -43,26 +43,48 @@ var randObject {.compileTime.} = initRand(20031030)
 proc generateParser (prevAST: NimNode, keyValueID: int, deserializeMap: JsonNode): NimNode {.compileTime.} =
   ## of節以降を生成する、ネストしたオブジェクトがある場合はfor文、case節までを生成する
   result = prevAST
-  
-  var objectTypeName = ""
 
   for deserializeKey, deserializeVal in deserializeMap.pairs:
     if deserializeKey == "type":
-      objectTypeName = deserializeVal.getStr.removeDoubleQuotation
       continue
 
-    elif deserializeKey[0] == '@':
+    if deserializeKey[0] == '@':
       ### アニメーション
-      let typeName = deserializeVal.getStr
-
-      if typeName == "int":
-        result.add getIntSequenceParserAST(deserializeKey[1..^1], keyValueID)
-      elif typeName == "float":
-        result.add getFloatSequenceParserAST(deserializeKey[1..^1], keyValueID)
-      elif typeName == "string":
-        result.add getStringSequenceParserAST(deserializeKey[1..^1], keyValueID)
-      else:
-        error("unsupported type")
+      if deserializeVal.kind == JString:
+        let typeName = deserializeVal.getStr
+        if typeName == "int":
+          result.add getIntSequenceParserAST(deserializeKey[1..^1], keyValueID)
+        elif typeName == "float":
+          result.add getFloatSequenceParserAST(deserializeKey[1..^1], keyValueID)
+        elif typeName == "string":
+          result.add getStringSequenceParserAST(deserializeKey[1..^1], keyValueID)
+        else:
+          error("unsupported type")
+      
+      elif deserializeVal.kind == JObject:
+        ### ネストしたオブジェクトのためにforとcaseを生成する
+        let
+          nextKeyValueID = randObject.rand(1000000)
+          currentResultElement = newIdentNode("resultElement_" & $keyValueID)
+          nextResultElement = newIdentNode("resultElement_" & $nextKeyValueID)
+          nextKey = newIdentNode("key_" & $nextKeyValueID)
+          nextVal = newIdentNode("val_" & $nextKeyValueID)
+          currentVal = newIdentNode("val_" & $keyValueID)
+          field = newIdentNode(deserializeKey[1..^1])
+          nextObjectName = newIdentNode(deserializeVal["type"].getStr.removeDoubleQuotation)
+        
+        result.add nnkOfBranch.newTree(
+          newLit(deserializeKey[1..^1]),
+          quote do:
+            for jsonArrayElement in `currentVal`:
+              var `nextResultElement` = `nextObjectName`()
+              for `nextKey`, `nextVal` in pairs(jsonArrayElement):
+                discard
+        )
+        result[^1][^1][^1][^1][^1][0] = nnkCaseStmt.newTree(nextKey)
+        result[^1][^1][^1][^1][^1].add generateParser(result[^1][^1][^1][^1][^1][0], nextKeyValueID, deserializeVal)
+        result[^1][^1][^1].add quote do:
+          `currentResultElement`.`field`.add `nextResultElement`
 
     elif deserializeVal.kind == JString:
       ### of節を生成する
@@ -85,42 +107,25 @@ proc generateParser (prevAST: NimNode, keyValueID: int, deserializeMap: JsonNode
       ### ネストしたオブジェクトのためにforとcaseを生成する
       let
         nextKeyValueID = randObject.rand(1000000)
-        nextResultElement = "resultElement_" & $nextKeyValueID
+        currentResultElement = newIdentNode("resultElement_" & $keyValueID)
+        nextResultElement = newIdentNode("resultElement_" & $nextKeyValueID)
+        nextKey = newIdentNode("key_" & $nextKeyValueID)
+        nextVal = newIdentNode("val_" & $nextKeyValueID)
+        currentVal = newIdentNode("val_" & $keyValueID)
+        field = newIdentNode(deserializeKey)
+        nextObjectName = newIdentNode(deserializeVal["type"].getStr.removeDoubleQuotation)
+      
       result.add nnkOfBranch.newTree(
         newLit(deserializeKey),
-        nnkStmtList.newTree(
-          nnkVarSection.newTree(
-            nnkIdentDefs.newTree(
-              newIdentNode(nextResultElement),
-              newEmptyNode(),
-              nnkCall.newTree(
-                newIdentNode(deserializeVal["type"].getStr.removeDoubleQuotation)
-              )
-            )
-          ),
-          nnkForStmt.newTree(
-            newIdentNode("key_" & $nextKeyValueID),
-            newIdentNode("val_" & $nextKeyValueID),
-            nnkDotExpr.newTree(
-              newIdentNode("val_" & $keyValueID),
-              newIdentNode("pairs")
-            ),
-            nnkStmtList.newTree(
-              nnkCaseStmt.newTree(
-                newIdentNode("key_" & $nextKeyValueID)
-              )
-            )
-          )
-        )
+        quote do:
+          var `nextResultElement` = `nextObjectName`()
+          for `nextKey`, `nextVal` in pairs(`currentVal`):
+            discard
       )
-      result[^1][^1][^1][^1][^1] = generateParser(result[^1][^1][^1][^1][^1], nextKeyValueID, deserializeVal)      
-      result[^1][^1].add nnkAsgn.newTree(
-        nnkDotExpr.newTree(
-          newIdentNode("resultElement_" & $keyValueID),
-          newIdentNode(deserializeKey)
-        ),
-        newIdentNode(nextResultElement)
-      )
+      result[^1][^1][^1][^1][0] = nnkCaseStmt.newTree(nextKey)
+      result[^1][^1][^1][^1].add generateParser(result[^1][^1][^1][^1][0], nextKeyValueID, deserializeVal)
+      result[^1][^1].add quote do:
+        `currentResultElement`.`field` = `nextResultElement`
 
 proc generateParserProc (procName, typeName: NimNode, json: JsonNode): NimNode {.compileTime.} =
   let
