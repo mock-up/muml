@@ -6,7 +6,7 @@ proc serialize (typedescNimNode: NimNode, rootType: bool): JsonNode {.compileTim
 
 proc parseTypeName (typeNameAST: NimNode): JsonNode {.compileTime.} =
   expectKind(typeNameAST, nnkSym)
-  const SupportTypes = ["int", "string", "bool", "float"]
+  const SupportTypes = ["int", "int8", "string", "bool", "float"]
   if $typeNameAST in SupportTypes:
     result = %* $typeNameAST
   else:
@@ -61,19 +61,25 @@ proc generateParser (prevAST: NimNode, keyValueID: int, deserializeMap: JsonNode
         result.add getFloatSequenceParserAST(deserializeKey[1..^1], keyValueID)
       elif typeName == "string":
         result.add getStringSequenceParserAST(deserializeKey[1..^1], keyValueID)
+      else:
+        error("unsupported type")
 
     elif deserializeVal.kind == JString:
       ### of節を生成する
       let typeName = deserializeVal.getStr
 
       if typeName == "int":
-        result.add nnkOfBranch.newTree(getValue(int, deserializeKey, keyValueID))
+        result.add getIntParserAST(deserializeKey, keyValueID)
+      elif typeName == "int8":
+        result.add getInt8ParserAST(deserializeKey, keyValueID)
       elif typeName == "float":
-        result.add nnkOfBranch.newTree(getValue(float, deserializeKey, keyValueID))
+        result.add getFloatParserAST(deserializeKey, keyValueID)
       elif typeName == "string":
-        result.add nnkOfBranch.newTree(getValue(string, deserializeKey, keyValueID))
+        result.add getStringParserAST(deserializeKey, keyValueID)
       elif typeName.len >= 4 and typeName[0..4] == "enum:":
-        result.add nnkOfBranch.newTree(getValue(enum, deserializeKey, deserializeVal.getStr, keyValueID))
+        result.add getEnumParserAST(typeName[5..^1], deserializeKey, keyValueID)
+      else:
+        error("unsupported type")
     
     elif deserializeVal.kind == JObject:
       ### ネストしたオブジェクトのためにforとcaseを生成する
