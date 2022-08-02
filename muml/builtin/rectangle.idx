@@ -1,0 +1,2 @@
+Reactangle	muml/builtin/rectangle.html#Reactangle	rectangle: Reactangle	
+parse_Reactangle	muml/builtin/rectangle.html#parse_Reactangle,JsonNode	rectangle: parse_Reactangle(muml`gensym0: JsonNode): mumlRootElement	

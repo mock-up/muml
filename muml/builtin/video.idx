@@ -1,0 +1,4 @@
+mumlVideoFrame	muml/builtin/video.html#mumlVideoFrame	video: mumlVideoFrame	
+mumlFilter	muml/builtin/video.html#mumlFilter	video: mumlFilter	
+Video	muml/builtin/video.html#Video	video: Video	
+parse_Video	muml/builtin/video.html#parse_Video,JsonNode	video: parse_Video(muml`gensym0: JsonNode): mumlRootElement	

@@ -1,8 +1,1 @@
 removeDoubleQuotation	muml/utils.html#removeDoubleQuotation,string	utils: removeDoubleQuotation(str: string): string	
-getFloatValueProperty	muml/utils.html#getFloatValueProperty,mumlNode,string	utils: getFloatValueProperty(muml: mumlNode; name: string): mumlFloatRange	
-getFrame	muml/utils.html#getFrame,mumlNode	utils: getFrame(muml: mumlNode): mumlIntRange	
-getNumberValue	muml/utils.html#getNumberValue,mumlNode	utils: getNumberValue(muml: mumlNode): seq[mumlValue]	
-getPosition	muml/utils.html#getPosition,mumlNode	utils: getPosition(muml: mumlNode): seq[muml2DPosition]	
-getScale	muml/utils.html#getScale,mumlNode	utils: getScale(muml: mumlNode): seq[mumlScale]	
-getRGB	muml/utils.html#getRGB,mumlNode	utils: getRGB(muml: mumlNode): seq[mumlRGB]	
-getFilters	muml/utils.html#getFilters,mumlNode	utils: getFilters(muml: mumlNode): seq[mumlFilter]	

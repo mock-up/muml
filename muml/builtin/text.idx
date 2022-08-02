@@ -1,0 +1,2 @@
+Text	muml/builtin/text.html#Text	text: Text	
+parse_Text	muml/builtin/text.html#parse_Text,JsonNode	text: parse_Text(muml`gensym0: JsonNode): mumlRootElement	

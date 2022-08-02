@@ -70,237 +70,129 @@ window.addEventListener('DOMContentLoaded', main);
 <div class="document" id="documentId">
   <div class="container">
     <h1 class="title">Index</h1>
-    Modules: <a href="muml.html">muml</a>, <a href="muml/builder.html">muml/builder</a>, <a href="muml/getValueUtils.html">muml/getValueUtils</a>, <a href="muml/header.html">muml/header</a>, <a href="muml/rectangle.html">muml/rectangle</a>, <a href="muml/text.html">muml/text</a>, <a href="muml/triangle.html">muml/triangle</a>, <a href="muml/types.html">muml/types</a>, <a href="muml/utils.html">muml/utils</a>, <a href="muml/video.html">muml/video</a>.<br/><p /><h2>API symbols</h2>
-<dl><dt><a name="%60%5B%5D%60" href="#%60%5B%5D%60"><span>`[]`:</span></a></dt><dd><ul class="simple">
+    Modules: <a href="muml.html">muml</a>, <a href="muml/builder.html">muml/builder</a>, <a href="muml/builtin/rectangle.html">muml/builtin/rectangle</a>, <a href="muml/builtin/text.html">muml/builtin/text</a>, <a href="muml/builtin/triangle.html">muml/builtin/triangle</a>, <a href="muml/builtin/types.html">muml/builtin/types</a>, <a href="muml/builtin/video.html">muml/builtin/video</a>, <a href="muml/deserializer.html">muml/deserializer</a>, <a href="muml/parserAST.html">muml/parserAST</a>, <a href="muml/utils.html">muml/utils</a>.<br/><p /><h2>API symbols</h2>
+<dl><dt><a name="%60type%60" href="#%60type%60"><span>`type`:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="muml: `[]`(muml: mumlNode; index: int): mumlObject" href="muml.html#%5B%5D%2CmumlNode%2Cint">muml: `[]`(muml: mumlNode; index: int): mumlObject</a></li>
+          data-doc-search-tag="muml: `type`(muml: JsonNode): string" href="muml.html#type%2CJsonNode">muml: `type`(muml: JsonNode): string</a></li>
           </ul></dd>
 <dt><a name="Animation" href="#Animation"><span>Animation:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="types: Animation" href="muml/types.html#Animation">types: Animation</a></li>
+          data-doc-search-tag="types: Animation" href="muml/builtin/types.html#Animation">types: Animation</a></li>
           </ul></dd>
-<dt><a name="colorInversion" href="#colorInversion"><span>colorInversion:</span></a></dt><dd><ul class="simple">
+<dt><a name="BuiltInElements" href="#BuiltInElements"><span>BuiltInElements:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="mumlFilterKind.colorInversion" href="muml/types.html#colorInversion">mumlFilterKind.colorInversion</a></li>
-          </ul></dd>
-<dt><a name="content" href="#content"><span>content:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="muml: content(muml: mumlNode): mumlNode" href="muml.html#content%2CmumlNode">muml: content(muml: mumlNode): mumlNode</a></li>
-          </ul></dd>
-<dt><a name="deserialize" href="#deserialize"><span>deserialize:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="muml: deserialize(muml: JsonNode): mumlRootObj" href="muml.html#deserialize.i%2CJsonNode">muml: deserialize(muml: JsonNode): mumlRootObj</a></li>
-          </ul></dd>
-<dt><a name="element" href="#element"><span>element:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="muml: element(muml: mumlNode): mumlObject" href="muml.html#element.i%2CmumlNode">muml: element(muml: mumlNode): mumlObject</a></li>
+          data-doc-search-tag="deserializer: BuiltInElements" href="muml/deserializer.html#BuiltInElements">deserializer: BuiltInElements</a></li>
           </ul></dd>
 <dt><a name="getEnumParserAST" href="#getEnumParserAST"><span>getEnumParserAST:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="getValueUtils: getEnumParserAST(typeName, deserializeKey: string; keyValueID: int): NimNode" href="muml/getValueUtils.html#getEnumParserAST%2Cstring%2Cstring%2Cint">getValueUtils: getEnumParserAST(typeName, deserializeKey: string; keyValueID: int): NimNode</a></li>
-          </ul></dd>
-<dt><a name="getFilters" href="#getFilters"><span>getFilters:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="utils: getFilters(muml: mumlNode): seq[mumlFilter]" href="muml/utils.html#getFilters%2CmumlNode">utils: getFilters(muml: mumlNode): seq[mumlFilter]</a></li>
+          data-doc-search-tag="parserAST: getEnumParserAST(typeName, deserializeKey: string; keyValueID: int): NimNode" href="muml/parserAST.html#getEnumParserAST%2Cstring%2Cstring%2Cint">parserAST: getEnumParserAST(typeName, deserializeKey: string; keyValueID: int): NimNode</a></li>
           </ul></dd>
 <dt><a name="getFloatParserAST" href="#getFloatParserAST"><span>getFloatParserAST:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="getValueUtils: getFloatParserAST(deserializeKey: string; keyValueID: int): NimNode" href="muml/getValueUtils.html#getFloatParserAST%2Cstring%2Cint">getValueUtils: getFloatParserAST(deserializeKey: string; keyValueID: int): NimNode</a></li>
+          data-doc-search-tag="parserAST: getFloatParserAST(deserializeKey: string; keyValueID: int): NimNode" href="muml/parserAST.html#getFloatParserAST%2Cstring%2Cint">parserAST: getFloatParserAST(deserializeKey: string; keyValueID: int): NimNode</a></li>
           </ul></dd>
 <dt><a name="getFloatSequenceParserAST" href="#getFloatSequenceParserAST"><span>getFloatSequenceParserAST:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="getValueUtils: getFloatSequenceParserAST(deserializeKey: string; keyValueID: int): NimNode" href="muml/getValueUtils.html#getFloatSequenceParserAST%2Cstring%2Cint">getValueUtils: getFloatSequenceParserAST(deserializeKey: string; keyValueID: int): NimNode</a></li>
-          </ul></dd>
-<dt><a name="getFloatValueProperty" href="#getFloatValueProperty"><span>getFloatValueProperty:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="utils: getFloatValueProperty(muml: mumlNode; name: string): mumlFloatRange" href="muml/utils.html#getFloatValueProperty%2CmumlNode%2Cstring">utils: getFloatValueProperty(muml: mumlNode; name: string): mumlFloatRange</a></li>
-          </ul></dd>
-<dt><a name="getFrame" href="#getFrame"><span>getFrame:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="utils: getFrame(muml: mumlNode): mumlIntRange" href="muml/utils.html#getFrame%2CmumlNode">utils: getFrame(muml: mumlNode): mumlIntRange</a></li>
-          </ul></dd>
-<dt><a name="getHeader" href="#getHeader"><span>getHeader:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="header: getHeader(muml: mumlNode): mumlHeader" href="muml/header.html#getHeader%2CmumlNode">header: getHeader(muml: mumlNode): mumlHeader</a></li>
+          data-doc-search-tag="parserAST: getFloatSequenceParserAST(deserializeKey: string; keyValueID: int): NimNode" href="muml/parserAST.html#getFloatSequenceParserAST%2Cstring%2Cint">parserAST: getFloatSequenceParserAST(deserializeKey: string; keyValueID: int): NimNode</a></li>
           </ul></dd>
 <dt><a name="getInt8ParserAST" href="#getInt8ParserAST"><span>getInt8ParserAST:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="getValueUtils: getInt8ParserAST(deserializeKey: string; keyValueID: int): NimNode" href="muml/getValueUtils.html#getInt8ParserAST%2Cstring%2Cint">getValueUtils: getInt8ParserAST(deserializeKey: string; keyValueID: int): NimNode</a></li>
+          data-doc-search-tag="parserAST: getInt8ParserAST(deserializeKey: string; keyValueID: int): NimNode" href="muml/parserAST.html#getInt8ParserAST%2Cstring%2Cint">parserAST: getInt8ParserAST(deserializeKey: string; keyValueID: int): NimNode</a></li>
           </ul></dd>
 <dt><a name="getIntParserAST" href="#getIntParserAST"><span>getIntParserAST:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="getValueUtils: getIntParserAST(deserializeKey: string; keyValueID: int): NimNode" href="muml/getValueUtils.html#getIntParserAST%2Cstring%2Cint">getValueUtils: getIntParserAST(deserializeKey: string; keyValueID: int): NimNode</a></li>
+          data-doc-search-tag="parserAST: getIntParserAST(deserializeKey: string; keyValueID: int): NimNode" href="muml/parserAST.html#getIntParserAST%2Cstring%2Cint">parserAST: getIntParserAST(deserializeKey: string; keyValueID: int): NimNode</a></li>
           </ul></dd>
 <dt><a name="getIntSequenceParserAST" href="#getIntSequenceParserAST"><span>getIntSequenceParserAST:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="getValueUtils: getIntSequenceParserAST(deserializeKey: string; keyValueID: int): NimNode" href="muml/getValueUtils.html#getIntSequenceParserAST%2Cstring%2Cint">getValueUtils: getIntSequenceParserAST(deserializeKey: string; keyValueID: int): NimNode</a></li>
-          </ul></dd>
-<dt><a name="getNumberValue" href="#getNumberValue"><span>getNumberValue:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="utils: getNumberValue(muml: mumlNode): seq[mumlValue]" href="muml/utils.html#getNumberValue%2CmumlNode">utils: getNumberValue(muml: mumlNode): seq[mumlValue]</a></li>
-          </ul></dd>
-<dt><a name="getPosition" href="#getPosition"><span>getPosition:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="utils: getPosition(muml: mumlNode): seq[muml2DPosition]" href="muml/utils.html#getPosition%2CmumlNode">utils: getPosition(muml: mumlNode): seq[muml2DPosition]</a></li>
-          </ul></dd>
-<dt><a name="getRectangle" href="#getRectangle"><span>getRectangle:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="rectangle: getRectangle(muml: mumlNode): mumlObject" href="muml/rectangle.html#getRectangle%2CmumlNode">rectangle: getRectangle(muml: mumlNode): mumlObject</a></li>
-          </ul></dd>
-<dt><a name="getRGB" href="#getRGB"><span>getRGB:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="utils: getRGB(muml: mumlNode): seq[mumlRGB]" href="muml/utils.html#getRGB%2CmumlNode">utils: getRGB(muml: mumlNode): seq[mumlRGB]</a></li>
-          </ul></dd>
-<dt><a name="getScale" href="#getScale"><span>getScale:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="utils: getScale(muml: mumlNode): seq[mumlScale]" href="muml/utils.html#getScale%2CmumlNode">utils: getScale(muml: mumlNode): seq[mumlScale]</a></li>
+          data-doc-search-tag="parserAST: getIntSequenceParserAST(deserializeKey: string; keyValueID: int): NimNode" href="muml/parserAST.html#getIntSequenceParserAST%2Cstring%2Cint">parserAST: getIntSequenceParserAST(deserializeKey: string; keyValueID: int): NimNode</a></li>
           </ul></dd>
 <dt><a name="getStringParserAST" href="#getStringParserAST"><span>getStringParserAST:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="getValueUtils: getStringParserAST(deserializeKey: string; keyValueID: int): NimNode" href="muml/getValueUtils.html#getStringParserAST%2Cstring%2Cint">getValueUtils: getStringParserAST(deserializeKey: string; keyValueID: int): NimNode</a></li>
+          data-doc-search-tag="parserAST: getStringParserAST(deserializeKey: string; keyValueID: int): NimNode" href="muml/parserAST.html#getStringParserAST%2Cstring%2Cint">parserAST: getStringParserAST(deserializeKey: string; keyValueID: int): NimNode</a></li>
           </ul></dd>
 <dt><a name="getStringSequenceParserAST" href="#getStringSequenceParserAST"><span>getStringSequenceParserAST:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="getValueUtils: getStringSequenceParserAST(deserializeKey: string; keyValueID: int): NimNode" href="muml/getValueUtils.html#getStringSequenceParserAST%2Cstring%2Cint">getValueUtils: getStringSequenceParserAST(deserializeKey: string; keyValueID: int): NimNode</a></li>
+          data-doc-search-tag="parserAST: getStringSequenceParserAST(deserializeKey: string; keyValueID: int): NimNode" href="muml/parserAST.html#getStringSequenceParserAST%2Cstring%2Cint">parserAST: getStringSequenceParserAST(deserializeKey: string; keyValueID: int): NimNode</a></li>
           </ul></dd>
-<dt><a name="getText" href="#getText"><span>getText:</span></a></dt><dd><ul class="simple">
+<dt><a name="Muml" href="#Muml"><span>Muml:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="text: getText(muml: mumlNode): mumlObject" href="muml/text.html#getText%2CmumlNode">text: getText(muml: mumlNode): mumlObject</a></li>
-          </ul></dd>
-<dt><a name="getVideo" href="#getVideo"><span>getVideo:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="video: getVideo(muml: mumlNode): mumlObject" href="muml/video.html#getVideo%2CmumlNode">video: getVideo(muml: mumlNode): mumlObject</a></li>
-          </ul></dd>
-<dt><a name="grayScale" href="#grayScale"><span>grayScale:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="mumlFilterKind.grayScale" href="muml/types.html#grayScale">mumlFilterKind.grayScale</a></li>
-          </ul></dd>
-<dt><a name="header" href="#header"><span>header:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="muml: header(muml: mumlNode): mumlNode" href="muml.html#header%2CmumlNode">muml: header(muml: mumlNode): mumlNode</a></li>
+          data-doc-search-tag="muml: Muml" href="muml.html#Muml">muml: Muml</a></li>
           </ul></dd>
 <dt><a name="muml" href="#muml"><span>muml:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="muml: muml(json: JsonNode): mumlNode" href="muml.html#muml%2CJsonNode">muml: muml(json: JsonNode): mumlNode</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="muml: muml(path: string): mumlNode" href="muml.html#muml%2Cstring">muml: muml(path: string): mumlNode</a></li>
-          </ul></dd>
-<dt><a name="muml2DPosition" href="#muml2DPosition"><span>muml2DPosition:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="types: muml2DPosition" href="muml/types.html#muml2DPosition">types: muml2DPosition</a></li>
-          </ul></dd>
-<dt><a name="mumlAudioBalance" href="#mumlAudioBalance"><span>mumlAudioBalance:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="types: mumlAudioBalance" href="muml/types.html#mumlAudioBalance">types: mumlAudioBalance</a></li>
+          data-doc-search-tag="muml: muml(json: JsonNode): Muml" href="muml.html#muml%2CJsonNode">muml: muml(json: JsonNode): Muml</a></li>
           </ul></dd>
 <dt><a name="mumlBuilder" href="#mumlBuilder"><span>mumlBuilder:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="builder: mumlBuilder(mumlElement: typedesc): untyped" href="muml/builder.html#mumlBuilder.m%2Ctypedesc">builder: mumlBuilder(mumlElement: typedesc): untyped</a></li>
           </ul></dd>
+<dt><a name="mumlDeserializer" href="#mumlDeserializer"><span>mumlDeserializer:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="deserializer: mumlDeserializer(customElements: varargs[untyped]): untyped" href="muml/deserializer.html#mumlDeserializer.m%2Cvarargs%5Buntyped%5D">deserializer: mumlDeserializer(customElements: varargs[untyped]): untyped</a></li>
+          </ul></dd>
 <dt><a name="mumlFilter" href="#mumlFilter"><span>mumlFilter:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="types: mumlFilter" href="muml/types.html#mumlFilter">types: mumlFilter</a></li>
+          data-doc-search-tag="video: mumlFilter" href="muml/builtin/video.html#mumlFilter">video: mumlFilter</a></li>
           </ul></dd>
-<dt><a name="mumlFilterKind" href="#mumlFilterKind"><span>mumlFilterKind:</span></a></dt><dd><ul class="simple">
+<dt><a name="mumlPosition" href="#mumlPosition"><span>mumlPosition:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="types: mumlFilterKind" href="muml/types.html#mumlFilterKind">types: mumlFilterKind</a></li>
+          data-doc-search-tag="types: mumlPosition" href="muml/builtin/types.html#mumlPosition">types: mumlPosition</a></li>
           </ul></dd>
-<dt><a name="mumlFloatRange" href="#mumlFloatRange"><span>mumlFloatRange:</span></a></dt><dd><ul class="simple">
+<dt><a name="mumlRootElement" href="#mumlRootElement"><span>mumlRootElement:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="types: mumlFloatRange" href="muml/types.html#mumlFloatRange">types: mumlFloatRange</a></li>
-          </ul></dd>
-<dt><a name="mumlHeader" href="#mumlHeader"><span>mumlHeader:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="types: mumlHeader" href="muml/types.html#mumlHeader">types: mumlHeader</a></li>
-          </ul></dd>
-<dt><a name="mumlIntRange" href="#mumlIntRange"><span>mumlIntRange:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="types: mumlIntRange" href="muml/types.html#mumlIntRange">types: mumlIntRange</a></li>
-          </ul></dd>
-<dt><a name="mumlKind" href="#mumlKind"><span>mumlKind:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="types: mumlKind" href="muml/types.html#mumlKind">types: mumlKind</a></li>
-          </ul></dd>
-<dt><a name="mumlKindAudio" href="#mumlKindAudio"><span>mumlKindAudio:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="mumlKind.mumlKindAudio" href="muml/types.html#mumlKindAudio">mumlKind.mumlKindAudio</a></li>
-          </ul></dd>
-<dt><a name="mumlKindRectangle" href="#mumlKindRectangle"><span>mumlKindRectangle:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="mumlKind.mumlKindRectangle" href="muml/types.html#mumlKindRectangle">mumlKind.mumlKindRectangle</a></li>
-          </ul></dd>
-<dt><a name="mumlKindText" href="#mumlKindText"><span>mumlKindText:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="mumlKind.mumlKindText" href="muml/types.html#mumlKindText">mumlKind.mumlKindText</a></li>
-          </ul></dd>
-<dt><a name="mumlKindTriangle" href="#mumlKindTriangle"><span>mumlKindTriangle:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="mumlKind.mumlKindTriangle" href="muml/types.html#mumlKindTriangle">mumlKind.mumlKindTriangle</a></li>
-          </ul></dd>
-<dt><a name="mumlKindVideo" href="#mumlKindVideo"><span>mumlKindVideo:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="mumlKind.mumlKindVideo" href="muml/types.html#mumlKindVideo">mumlKind.mumlKindVideo</a></li>
-          </ul></dd>
-<dt><a name="mumlNode" href="#mumlNode"><span>mumlNode:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="types: mumlNode" href="muml/types.html#mumlNode">types: mumlNode</a></li>
-          </ul></dd>
-<dt><a name="mumlObject" href="#mumlObject"><span>mumlObject:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="types: mumlObject" href="muml/types.html#mumlObject">types: mumlObject</a></li>
-          </ul></dd>
-<dt><a name="mumlRectangle" href="#mumlRectangle"><span>mumlRectangle:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="types: mumlRectangle" href="muml/types.html#mumlRectangle">types: mumlRectangle</a></li>
-          </ul></dd>
-<dt><a name="mumlRGB" href="#mumlRGB"><span>mumlRGB:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="types: mumlRGB" href="muml/types.html#mumlRGB">types: mumlRGB</a></li>
-          </ul></dd>
-<dt><a name="mumlRootObj" href="#mumlRootObj"><span>mumlRootObj:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="types: mumlRootObj" href="muml/types.html#mumlRootObj">types: mumlRootObj</a></li>
+          data-doc-search-tag="types: mumlRootElement" href="muml/builtin/types.html#mumlRootElement">types: mumlRootElement</a></li>
           </ul></dd>
 <dt><a name="mumlScale" href="#mumlScale"><span>mumlScale:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="types: mumlScale" href="muml/types.html#mumlScale">types: mumlScale</a></li>
+          data-doc-search-tag="types: mumlScale" href="muml/builtin/types.html#mumlScale">types: mumlScale</a></li>
           </ul></dd>
-<dt><a name="mumlText" href="#mumlText"><span>mumlText:</span></a></dt><dd><ul class="simple">
+<dt><a name="mumlVideoFrame" href="#mumlVideoFrame"><span>mumlVideoFrame:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="types: mumlText" href="muml/types.html#mumlText">types: mumlText</a></li>
+          data-doc-search-tag="video: mumlVideoFrame" href="muml/builtin/video.html#mumlVideoFrame">video: mumlVideoFrame</a></li>
           </ul></dd>
-<dt><a name="mumlTriangle" href="#mumlTriangle"><span>mumlTriangle:</span></a></dt><dd><ul class="simple">
+<dt><a name="parse_Reactangle" href="#parse_Reactangle"><span>parse_Reactangle:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="types: mumlTriangle" href="muml/types.html#mumlTriangle">types: mumlTriangle</a></li>
+          data-doc-search-tag="rectangle: parse_Reactangle(muml`gensym0: JsonNode): mumlRootElement" href="muml/builtin/rectangle.html#parse_Reactangle%2CJsonNode">rectangle: parse_Reactangle(muml`gensym0: JsonNode): mumlRootElement</a></li>
           </ul></dd>
-<dt><a name="mumlValue" href="#mumlValue"><span>mumlValue:</span></a></dt><dd><ul class="simple">
+<dt><a name="parse_Text" href="#parse_Text"><span>parse_Text:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="types: mumlValue" href="muml/types.html#mumlValue">types: mumlValue</a></li>
+          data-doc-search-tag="text: parse_Text(muml`gensym0: JsonNode): mumlRootElement" href="muml/builtin/text.html#parse_Text%2CJsonNode">text: parse_Text(muml`gensym0: JsonNode): mumlRootElement</a></li>
           </ul></dd>
-<dt><a name="mumlVideo_Audio" href="#mumlVideo_Audio"><span>mumlVideo_Audio:</span></a></dt><dd><ul class="simple">
+<dt><a name="parse_Triangle" href="#parse_Triangle"><span>parse_Triangle:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="types: mumlVideo_Audio" href="muml/types.html#mumlVideo_Audio">types: mumlVideo_Audio</a></li>
+          data-doc-search-tag="triangle: parse_Triangle(muml`gensym0: JsonNode): mumlRootElement" href="muml/builtin/triangle.html#parse_Triangle%2CJsonNode">triangle: parse_Triangle(muml`gensym0: JsonNode): mumlRootElement</a></li>
           </ul></dd>
-<dt><a name="mumlVideo_Video" href="#mumlVideo_Video"><span>mumlVideo_Video:</span></a></dt><dd><ul class="simple">
+<dt><a name="parse_Video" href="#parse_Video"><span>parse_Video:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="types: mumlVideo_Video" href="muml/types.html#mumlVideo_Video">types: mumlVideo_Video</a></li>
+          data-doc-search-tag="video: parse_Video(muml`gensym0: JsonNode): mumlRootElement" href="muml/builtin/video.html#parse_Video%2CJsonNode">video: parse_Video(muml`gensym0: JsonNode): mumlRootElement</a></li>
           </ul></dd>
-<dt><a name="parse_mumlTriangle" href="#parse_mumlTriangle"><span>parse_mumlTriangle:</span></a></dt><dd><ul class="simple">
+<dt><a name="Reactangle" href="#Reactangle"><span>Reactangle:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="triangle: parse_mumlTriangle(muml`gensym0: mumlNode): mumlRootObj" href="muml/triangle.html#parse_mumlTriangle%2CmumlNode">triangle: parse_mumlTriangle(muml`gensym0: mumlNode): mumlRootObj</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="triangle: parse_mumlTriangle(muml`gensym0: mumlNode): mumlRootObj" href="muml/triangle.html#parse_mumlTriangle%2CmumlNode_2">triangle: parse_mumlTriangle(muml`gensym0: mumlNode): mumlRootObj</a></li>
+          data-doc-search-tag="rectangle: Reactangle" href="muml/builtin/rectangle.html#Reactangle">rectangle: Reactangle</a></li>
           </ul></dd>
 <dt><a name="removeDoubleQuotation" href="#removeDoubleQuotation"><span>removeDoubleQuotation:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="utils: removeDoubleQuotation(str: string): string" href="muml/utils.html#removeDoubleQuotation%2Cstring">utils: removeDoubleQuotation(str: string): string</a></li>
+          </ul></dd>
+<dt><a name="Text" href="#Text"><span>Text:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="text: Text" href="muml/builtin/text.html#Text">text: Text</a></li>
+          </ul></dd>
+<dt><a name="Triangle" href="#Triangle"><span>Triangle:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="triangle: Triangle" href="muml/builtin/triangle.html#Triangle">triangle: Triangle</a></li>
+          </ul></dd>
+<dt><a name="Video" href="#Video"><span>Video:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="video: Video" href="muml/builtin/video.html#Video">video: Video</a></li>
           </ul></dd>
 </dl>
     <div class="row">
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2022-08-01 22:56:32 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2022-08-02 04:26:17 UTC</small>
       </div>
     </div>
   </div>

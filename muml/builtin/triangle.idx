@@ -1,0 +1,2 @@
+Triangle	muml/builtin/triangle.html#Triangle	triangle: Triangle	
+parse_Triangle	muml/builtin/triangle.html#parse_Triangle,JsonNode	triangle: parse_Triangle(muml`gensym0: JsonNode): mumlRootElement	

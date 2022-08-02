@@ -1,0 +1,8 @@
+getIntParserAST	muml/parserAST.html#getIntParserAST,string,int	parserAST: getIntParserAST(deserializeKey: string; keyValueID: int): NimNode	
+getInt8ParserAST	muml/parserAST.html#getInt8ParserAST,string,int	parserAST: getInt8ParserAST(deserializeKey: string; keyValueID: int): NimNode	
+getFloatParserAST	muml/parserAST.html#getFloatParserAST,string,int	parserAST: getFloatParserAST(deserializeKey: string; keyValueID: int): NimNode	
+getStringParserAST	muml/parserAST.html#getStringParserAST,string,int	parserAST: getStringParserAST(deserializeKey: string; keyValueID: int): NimNode	
+getEnumParserAST	muml/parserAST.html#getEnumParserAST,string,string,int	parserAST: getEnumParserAST(typeName, deserializeKey: string; keyValueID: int): NimNode	
+getFloatSequenceParserAST	muml/parserAST.html#getFloatSequenceParserAST,string,int	parserAST: getFloatSequenceParserAST(deserializeKey: string; keyValueID: int): NimNode	
+getIntSequenceParserAST	muml/parserAST.html#getIntSequenceParserAST,string,int	parserAST: getIntSequenceParserAST(deserializeKey: string; keyValueID: int): NimNode	
+getStringSequenceParserAST	muml/parserAST.html#getStringSequenceParserAST,string,int	parserAST: getStringSequenceParserAST(deserializeKey: string; keyValueID: int): NimNode	
