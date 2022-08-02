@@ -1,6 +1,6 @@
-import json, muml/[types, utils, video, rectangle, header, text], uuids
-import muml/builtin/[triangle]
-export types, utils, video, rectangle, header, text, uuids, triangle
+import json, muml/[utils, builder, deserializer]
+import muml/builtin/[triangle, rectangle, video, text]
+export utils, video, rectangle, text, triangle, builder, deserializer
 
 type
   Muml* = object
@@ -18,7 +18,7 @@ proc muml* (json: JsonNode): Muml =
   result.header = json["muml"]["header"]
   result.contents = json["muml"]["contents"]
 
-proc type (muml: JsonNode): string =
+proc type* (muml: JsonNode): string =
   if not muml.hasKey("type"):
     raise newException(Exception, "no type tag")
   result = muml["type"].getStr.removeDoubleQuotation
