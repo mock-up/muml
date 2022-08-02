@@ -1,7 +1,10 @@
+import uuids
+
 type
   Animation* [T] = seq[T]
 
   mumlRootElement* = ref object of RootObj
+    id*: UUID
     layer: int
     frame: Animation[int]
   
