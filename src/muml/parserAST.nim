@@ -49,6 +49,46 @@ proc getInt64ParserAST* (deserializeKey: string, keyValueID: int): NimNode =
       `resultElement`.`key` = int64(getInt(`val`))
   )
 
+proc getUintParserAST* (deserializeKey: string, keyValueID: int): NimNode =
+  let (val, resultElement, key) = toIdent(deserializeKey, keyValueID)
+  result = nnkOfBranch.newTree(
+    newLit(deserializeKey),
+    quote do:
+      `resultElement`.`key` = uint(getInt(`val`))
+  )
+
+proc getUint8ParserAST* (deserializeKey: string, keyValueID: int): NimNode =
+  let (val, resultElement, key) = toIdent(deserializeKey, keyValueID)
+  result = nnkOfBranch.newTree(
+    newLit(deserializeKey),
+    quote do:
+      `resultElement`.`key` = uint8(getInt(`val`))
+  )
+
+proc getUint16ParserAST* (deserializeKey: string, keyValueID: int): NimNode =
+  let (val, resultElement, key) = toIdent(deserializeKey, keyValueID)
+  result = nnkOfBranch.newTree(
+    newLit(deserializeKey),
+    quote do:
+      `resultElement`.`key` = uint16(getInt(`val`))
+  )
+
+proc getUint32ParserAST* (deserializeKey: string, keyValueID: int): NimNode =
+  let (val, resultElement, key) = toIdent(deserializeKey, keyValueID)
+  result = nnkOfBranch.newTree(
+    newLit(deserializeKey),
+    quote do:
+      `resultElement`.`key` = uint32(getInt(`val`))
+  )
+
+proc getUint64ParserAST* (deserializeKey: string, keyValueID: int): NimNode =
+  let (val, resultElement, key) = toIdent(deserializeKey, keyValueID)
+  result = nnkOfBranch.newTree(
+    newLit(deserializeKey),
+    quote do:
+      `resultElement`.`key` = uint64(getInt(`val`))
+  )
+
 proc getFloatParserAST* (deserializeKey: string, keyValueID: int): NimNode =
   let (val, resultElement, key) = toIdent(deserializeKey, keyValueID)
   result = nnkOfBranch.newTree(
@@ -57,12 +97,39 @@ proc getFloatParserAST* (deserializeKey: string, keyValueID: int): NimNode =
       `resultElement`.`key` = getFloat(`val`)
   )
 
+proc getFloat32ParserAST* (deserializeKey: string, keyValueID: int): NimNode =
+  let (val, resultElement, key) = toIdent(deserializeKey, keyValueID)
+  result = nnkOfBranch.newTree(
+    newLit(deserializeKey),
+    quote do:
+      `resultElement`.`key` = float32(getFloat(`val`))
+  )
+
+proc getFloat64ParserAST* (deserializeKey: string, keyValueID: int): NimNode =
+  let (val, resultElement, key) = toIdent(deserializeKey, keyValueID)
+  result = nnkOfBranch.newTree(
+    newLit(deserializeKey),
+    quote do:
+      `resultElement`.`key` = float64(getFloat(`val`))
+  )
+
 proc getStringParserAST* (deserializeKey: string, keyValueID: int): NimNode =
   let (val, resultElement, key) = toIdent(deserializeKey, keyValueID)
   result = nnkOfBranch.newTree(
     newLit(deserializeKey),
     quote do:
       `resultElement`.`key` = getStr(`val`).removeDoubleQuotation
+  )
+
+proc getCharParserAST* (deserializeKey: string, keyValueID: int): NimNode =
+  let (val, resultElement, key) = toIdent(deserializeKey, keyValueID)
+  result = nnkOfBranch.newTree(
+    newLit(deserializeKey),
+    quote do:
+      if getStr(`val`).len == 1:
+        `resultElement`.`key` = getStr(`val`).removeDoubleQuotation[0]
+      else:
+        raise newException(Defect, "Cannot accept type string; can accept only one ASCII character.")
   )
 
 proc getEnumParserAST* (typeName, deserializeKey: string, keyValueID: int): NimNode =
@@ -88,6 +155,24 @@ proc getFloatSequenceParserAST* (deserializeKey: string, keyValueID: int): NimNo
     quote do:
       for jsonArrayElement in `val`:
         `resultElement`.`key`.add jsonArrayElement.getFloat
+  )
+
+proc getFloat32SequenceParserAST* (deserializeKey: string, keyValueID: int): NimNode =
+  let (val, resultElement, key) = toIdent(deserializeKey, keyValueID)
+  result = nnkOfBranch.newTree(
+    newLit(deserializeKey),
+    quote do:
+      for jsonArrayElement in `val`:
+        `resultElement`.`key`.add float32(jsonArrayElement.getFloat)
+  )
+
+proc getFloat64SequenceParserAST* (deserializeKey: string, keyValueID: int): NimNode =
+  let (val, resultElement, key) = toIdent(deserializeKey, keyValueID)
+  result = nnkOfBranch.newTree(
+    newLit(deserializeKey),
+    quote do:
+      for jsonArrayElement in `val`:
+        `resultElement`.`key`.add float64(jsonArrayElement.getFloat)
   )
 
 proc getIntSequenceParserAST* (deserializeKey: string, keyValueID: int): NimNode =
@@ -135,6 +220,51 @@ proc getInt64SequenceParserAST* (deserializeKey: string, keyValueID: int): NimNo
         `resultElement`.`key`.add int64(jsonArrayElement.getInt)
   )
 
+proc getUintSequenceParserAST* (deserializeKey: string, keyValueID: int): NimNode =
+  let (val, resultElement, key) = toIdent(deserializeKey, keyValueID)
+  result = nnkOfBranch.newTree(
+    newLit(deserializeKey),
+    quote do:
+      for jsonArrayElement in `val`:
+        `resultElement`.`key`.add uint(jsonArrayElement.getInt)
+  )
+
+proc getUint8SequenceParserAST* (deserializeKey: string, keyValueID: int): NimNode =
+  let (val, resultElement, key) = toIdent(deserializeKey, keyValueID)
+  result = nnkOfBranch.newTree(
+    newLit(deserializeKey),
+    quote do:
+      for jsonArrayElement in `val`:
+        `resultElement`.`key`.add uint8(jsonArrayElement.getInt)
+  )
+
+proc getUint16SequenceParserAST* (deserializeKey: string, keyValueID: int): NimNode =
+  let (val, resultElement, key) = toIdent(deserializeKey, keyValueID)
+  result = nnkOfBranch.newTree(
+    newLit(deserializeKey),
+    quote do:
+      for jsonArrayElement in `val`:
+        `resultElement`.`key`.add uint16(jsonArrayElement.getInt)
+  )
+
+proc getUint32SequenceParserAST* (deserializeKey: string, keyValueID: int): NimNode =
+  let (val, resultElement, key) = toIdent(deserializeKey, keyValueID)
+  result = nnkOfBranch.newTree(
+    newLit(deserializeKey),
+    quote do:
+      for jsonArrayElement in `val`:
+        `resultElement`.`key`.add uint32(jsonArrayElement.getInt)
+  )
+
+proc getUint64SequenceParserAST* (deserializeKey: string, keyValueID: int): NimNode =
+  let (val, resultElement, key) = toIdent(deserializeKey, keyValueID)
+  result = nnkOfBranch.newTree(
+    newLit(deserializeKey),
+    quote do:
+      for jsonArrayElement in `val`:
+        `resultElement`.`key`.add uint64(jsonArrayElement.getInt)
+  )
+
 proc getStringSequenceParserAST* (deserializeKey: string, keyValueID: int): NimNode =
   let (val, resultElement, key) = toIdent(deserializeKey, keyValueID)
   result = nnkOfBranch.newTree(
@@ -142,6 +272,18 @@ proc getStringSequenceParserAST* (deserializeKey: string, keyValueID: int): NimN
     quote do:
       for jsonArrayElement in `val`:
         `resultElement`.`key`.add jsonArrayElement.getStr.removeDoubleQuotation
+  )
+
+proc getCharSequenceParserAST* (deserializeKey: string, keyValueID: int): NimNode =
+  let (val, resultElement, key) = toIdent(deserializeKey, keyValueID)
+  result = nnkOfBranch.newTree(
+    newLit(deserializeKey),
+    quote do:
+      for jsonArrayElement in `val`:
+        if getStr(`val`).len == 1:
+          `resultElement`.`key`.add = getStr(`val`).removeDoubleQuotation[0]
+        else:
+          raise newException(Defect, "Cannot accept type string; can accept only one ASCII character.")
   )
 
 proc getBoolSequenceParserAST* (deserializeKey: string, keyValueID: int): NimNode =

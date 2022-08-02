@@ -6,7 +6,11 @@ proc serialize (typedescNimNode: NimNode, rootType: bool): JsonNode {.compileTim
 
 proc parseTypeName (typeNameAST: NimNode): JsonNode {.compileTime.} =
   expectKind(typeNameAST, nnkSym)
-  const SupportTypes = ["int", "int8", "string", "bool", "float"]
+  const SupportTypes = [
+    "int", "int8", "int16", "int32", "int64",
+    "uint", "uint8", "uint16", "uint32", "uint64",
+    "char", "string", "bool", "float", "float32", "float64"
+  ]
   if $typeNameAST in SupportTypes:
     result = %* $typeNameAST
   else:
@@ -65,8 +69,34 @@ proc generateParser (prevAST: NimNode, keyValueID: int, deserializeMap: JsonNode
         let typeName = deserializeVal.getStr
         if typeName == "int":
           result.add getIntSequenceParserAST(deserializeKey[1..^1], keyValueID)
+        elif typeName == "int8":
+          result.add getInt8SequenceParserAST(deserializeKey[1..^1], keyValueID)
+        elif typeName == "int16":
+          result.add getInt16SequenceParserAST(deserializeKey[1..^1], keyValueID)
+        elif typeName == "int32":
+          result.add getInt32SequenceParserAST(deserializeKey[1..^1], keyValueID)
+        elif typeName == "int64":
+          result.add getInt64SequenceParserAST(deserializeKey[1..^1], keyValueID)
+        elif typeName == "uint":
+          result.add getUintSequenceParserAST(deserializeKey[1..^1], keyValueID)
+        elif typeName == "uint8":
+          result.add getUint8SequenceParserAST(deserializeKey[1..^1], keyValueID)
+        elif typeName == "uint16":
+          result.add getUint16SequenceParserAST(deserializeKey[1..^1], keyValueID)
+        elif typeName == "uint32":
+          result.add getUint32SequenceParserAST(deserializeKey[1..^1], keyValueID)
+        elif typeName == "uint64":
+          result.add getUint64SequenceParserAST(deserializeKey[1..^1], keyValueID)
         elif typeName == "float":
           result.add getFloatSequenceParserAST(deserializeKey[1..^1], keyValueID)
+        elif typeName == "float32":
+          result.add getFloat32SequenceParserAST(deserializeKey[1..^1], keyValueID)
+        elif typeName == "float64":
+          result.add getFloat64SequenceParserAST(deserializeKey[1..^1], keyValueID)
+        elif typeName == "bool":
+          result.add getBoolSequenceParserAST(deserializeKey[1..^1], keyValueID)
+        elif typeName == "char":
+          result.add getCharSequenceParserAST(deserializeKey[1..^1], keyValueID)
         elif typeName == "string":
           result.add getStringSequenceParserAST(deserializeKey[1..^1], keyValueID)
         else:
@@ -105,8 +135,32 @@ proc generateParser (prevAST: NimNode, keyValueID: int, deserializeMap: JsonNode
         result.add getIntParserAST(deserializeKey, keyValueID)
       elif typeName == "int8":
         result.add getInt8ParserAST(deserializeKey, keyValueID)
+      elif typeName == "int16":
+        result.add getInt16ParserAST(deserializeKey, keyValueID)
+      elif typeName == "int32":
+        result.add getInt32ParserAST(deserializeKey, keyValueID)
+      elif typeName == "int64":
+        result.add getInt64ParserAST(deserializeKey, keyValueID)
+      elif typeName == "uint":
+        result.add getUintParserAST(deserializeKey, keyValueID)
+      elif typeName == "uint8":
+        result.add getUint8ParserAST(deserializeKey, keyValueID)
+      elif typeName == "uint16":
+        result.add getUint16ParserAST(deserializeKey, keyValueID)
+      elif typeName == "uint32":
+        result.add getUint32ParserAST(deserializeKey, keyValueID)
+      elif typeName == "uint64":
+        result.add getUint64ParserAST(deserializeKey, keyValueID)
       elif typeName == "float":
         result.add getFloatParserAST(deserializeKey, keyValueID)
+      elif typeName == "float32":
+        result.add getFloat32ParserAST(deserializeKey, keyValueID)
+      elif typeName == "float64":
+        result.add getFloat64ParserAST(deserializeKey, keyValueID)
+      elif typeName == "bool":
+        result.add getBoolParserAST(deserializeKey, keyValueID)
+      elif typeName == "char":
+        result.add getCharParserAST(deserializeKey, keyValueID)
       elif typeName == "string":
         result.add getStringParserAST(deserializeKey, keyValueID)
       elif typeName.len >= 4 and typeName[0..4] == "enum:":
