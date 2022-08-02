@@ -1,28 +1,51 @@
-import std/macros
+import std/macros, json, builder
+import builtin/types
+import uuids
 
 const BuiltInElements* = [
-  "video", "image", "audio",
-  "triangle", "rectangle", "text"
+  "Video", # "image", "audio",
+  "Triangle",
+  "Rectangle", "Text"
 ]
 
-macro mumlDeserializer* (elements: varargs[untyped]): untyped =
-  var elements = elements
-  for builtInElement in BuiltInElements:
-    elements.add newIdentNode(builtInElement)
-  echo elements.astGenRepr
+proc caseOfApplyParserAST (elements: seq[string]): NimNode =
+  result = nnkCaseStmt.newTree(
+    nnkDotExpr.newTree(
+      nnkBracketExpr.newTree(
+        newIdentNode("element"),
+        newLit("type")
+      ),
+      newIdentNode("getStr")
+    )
+  )
+  for element in elements:
+    result.add nnkOfBranch.newTree(
+      newLit(element),
+      nnkStmtList.newTree(
+        nnkCall.newTree(
+          newIdentNode("parse_" & element),
+          newIdentNode("element")
+        )
+      )
+    )
+  result.add nnkElse.newTree(
+    quote do:
+      raise newException(Exception, "not found tag")
+  )
+
+macro mumlDeserializer* (customElements: varargs[untyped]): untyped =
+  var elements = @BuiltInElements
+  for customElement in customElements:
+    elements.add $customElement
 
   let
     procName = newIdentNode("muml")
-  result = quote do:
-    import std/[json]
-    proc `procName`* (json: JsonNode): Muml =
-      for elem in muml.items:
-        var mumlObj = case elem.type:
-          of "video": getVideo(elem)
-          of "triangle": getTriangle(elem)
-          of "rectangle": getRectangle(elem)
-          of "text": getText(elem)
-          else: raise newException(Exception, "not found tag")
-      mumlObj.uuid = genUuid()
+    elementIdent = newIdentNode("element")
+    caseOfApplyParser = caseOfApplyParserAST(elements)
 
-mumlDeserializer(myElement1, myElement2)
+  result = quote do:
+    proc `procName`* (json: JsonNode): seq[mumlRootElement] =
+      for `elementIdent` in json:
+        var mumlObj = `caseOfApplyParser`
+        mumlObj.id = genUuid()
+        result.add mumlObj
