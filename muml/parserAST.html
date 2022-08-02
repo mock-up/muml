@@ -101,7 +101,17 @@ window.addEventListener('DOMContentLoaded', main);
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <ul class="simple nested-toc-section">getEnumParserAST
+      <ul class="simple nested-toc-section">getBoolParserAST
+      <li><a class="reference" href="#getBoolParserAST%2Cstring%2Cint"
+    title="getBoolParserAST(deserializeKey: string; keyValueID: int): NimNode">getBoolParserAST(deserializeKey: string; keyValueID: int): NimNode</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getBoolSequenceParserAST
+      <li><a class="reference" href="#getBoolSequenceParserAST%2Cstring%2Cint"
+    title="getBoolSequenceParserAST(deserializeKey: string; keyValueID: int): NimNode">getBoolSequenceParserAST(deserializeKey: string; keyValueID: int): NimNode</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getEnumParserAST
       <li><a class="reference" href="#getEnumParserAST%2Cstring%2Cstring%2Cint"
     title="getEnumParserAST(typeName, deserializeKey: string; keyValueID: int): NimNode">getEnumParserAST(typeName, deserializeKey: string; keyValueID: int): NimNode</a></li>
 
@@ -119,6 +129,41 @@ window.addEventListener('DOMContentLoaded', main);
   <ul class="simple nested-toc-section">getInt8ParserAST
       <li><a class="reference" href="#getInt8ParserAST%2Cstring%2Cint"
     title="getInt8ParserAST(deserializeKey: string; keyValueID: int): NimNode">getInt8ParserAST(deserializeKey: string; keyValueID: int): NimNode</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getInt8SequenceParserAST
+      <li><a class="reference" href="#getInt8SequenceParserAST%2Cstring%2Cint"
+    title="getInt8SequenceParserAST(deserializeKey: string; keyValueID: int): NimNode">getInt8SequenceParserAST(deserializeKey: string; keyValueID: int): NimNode</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getInt16ParserAST
+      <li><a class="reference" href="#getInt16ParserAST%2Cstring%2Cint"
+    title="getInt16ParserAST(deserializeKey: string; keyValueID: int): NimNode">getInt16ParserAST(deserializeKey: string; keyValueID: int): NimNode</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getInt16SequenceParserAST
+      <li><a class="reference" href="#getInt16SequenceParserAST%2Cstring%2Cint"
+    title="getInt16SequenceParserAST(deserializeKey: string; keyValueID: int): NimNode">getInt16SequenceParserAST(deserializeKey: string; keyValueID: int): NimNode</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getInt32ParserAST
+      <li><a class="reference" href="#getInt32ParserAST%2Cstring%2Cint"
+    title="getInt32ParserAST(deserializeKey: string; keyValueID: int): NimNode">getInt32ParserAST(deserializeKey: string; keyValueID: int): NimNode</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getInt32SequenceParserAST
+      <li><a class="reference" href="#getInt32SequenceParserAST%2Cstring%2Cint"
+    title="getInt32SequenceParserAST(deserializeKey: string; keyValueID: int): NimNode">getInt32SequenceParserAST(deserializeKey: string; keyValueID: int): NimNode</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getInt64ParserAST
+      <li><a class="reference" href="#getInt64ParserAST%2Cstring%2Cint"
+    title="getInt64ParserAST(deserializeKey: string; keyValueID: int): NimNode">getInt64ParserAST(deserializeKey: string; keyValueID: int): NimNode</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getInt64SequenceParserAST
+      <li><a class="reference" href="#getInt64SequenceParserAST%2Cstring%2Cint"
+    title="getInt64SequenceParserAST(deserializeKey: string; keyValueID: int): NimNode">getInt64SequenceParserAST(deserializeKey: string; keyValueID: int): NimNode</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">getIntParserAST
@@ -156,6 +201,24 @@ window.addEventListener('DOMContentLoaded', main);
   <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
+<div id="getBoolParserAST,string,int">
+<dt><pre><span class="Keyword">proc</span> <a href="#getBoolParserAST%2Cstring%2Cint"><span class="Identifier">getBoolParserAST</span></a><span class="Other">(</span><span class="Identifier">deserializeKey</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">keyValueID</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">NimNode</span> {.
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+
+</dd>
+</div>
+<div id="getBoolSequenceParserAST,string,int">
+<dt><pre><span class="Keyword">proc</span> <a href="#getBoolSequenceParserAST%2Cstring%2Cint"><span class="Identifier">getBoolSequenceParserAST</span></a><span class="Other">(</span><span class="Identifier">deserializeKey</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">keyValueID</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">NimNode</span> {.
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+
+</dd>
+</div>
 <div id="getEnumParserAST,string,string,int">
 <dt><pre><span class="Keyword">proc</span> <a href="#getEnumParserAST%2Cstring%2Cstring%2Cint"><span class="Identifier">getEnumParserAST</span></a><span class="Other">(</span><span class="Identifier">typeName</span><span class="Other">,</span> <span class="Identifier">deserializeKey</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">keyValueID</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">NimNode</span> {.
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
@@ -185,6 +248,69 @@ window.addEventListener('DOMContentLoaded', main);
 </div>
 <div id="getInt8ParserAST,string,int">
 <dt><pre><span class="Keyword">proc</span> <a href="#getInt8ParserAST%2Cstring%2Cint"><span class="Identifier">getInt8ParserAST</span></a><span class="Other">(</span><span class="Identifier">deserializeKey</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">keyValueID</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">NimNode</span> {.
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+
+</dd>
+</div>
+<div id="getInt8SequenceParserAST,string,int">
+<dt><pre><span class="Keyword">proc</span> <a href="#getInt8SequenceParserAST%2Cstring%2Cint"><span class="Identifier">getInt8SequenceParserAST</span></a><span class="Other">(</span><span class="Identifier">deserializeKey</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">keyValueID</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">NimNode</span> {.
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+
+</dd>
+</div>
+<div id="getInt16ParserAST,string,int">
+<dt><pre><span class="Keyword">proc</span> <a href="#getInt16ParserAST%2Cstring%2Cint"><span class="Identifier">getInt16ParserAST</span></a><span class="Other">(</span><span class="Identifier">deserializeKey</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">keyValueID</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">NimNode</span> {.
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+
+</dd>
+</div>
+<div id="getInt16SequenceParserAST,string,int">
+<dt><pre><span class="Keyword">proc</span> <a href="#getInt16SequenceParserAST%2Cstring%2Cint"><span class="Identifier">getInt16SequenceParserAST</span></a><span class="Other">(</span><span class="Identifier">deserializeKey</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">keyValueID</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">NimNode</span> {.
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+
+</dd>
+</div>
+<div id="getInt32ParserAST,string,int">
+<dt><pre><span class="Keyword">proc</span> <a href="#getInt32ParserAST%2Cstring%2Cint"><span class="Identifier">getInt32ParserAST</span></a><span class="Other">(</span><span class="Identifier">deserializeKey</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">keyValueID</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">NimNode</span> {.
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+
+</dd>
+</div>
+<div id="getInt32SequenceParserAST,string,int">
+<dt><pre><span class="Keyword">proc</span> <a href="#getInt32SequenceParserAST%2Cstring%2Cint"><span class="Identifier">getInt32SequenceParserAST</span></a><span class="Other">(</span><span class="Identifier">deserializeKey</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">keyValueID</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">NimNode</span> {.
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+
+</dd>
+</div>
+<div id="getInt64ParserAST,string,int">
+<dt><pre><span class="Keyword">proc</span> <a href="#getInt64ParserAST%2Cstring%2Cint"><span class="Identifier">getInt64ParserAST</span></a><span class="Other">(</span><span class="Identifier">deserializeKey</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">keyValueID</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">NimNode</span> {.
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+
+
+</dd>
+</div>
+<div id="getInt64SequenceParserAST,string,int">
+<dt><pre><span class="Keyword">proc</span> <a href="#getInt64SequenceParserAST%2Cstring%2Cint"><span class="Identifier">getInt64SequenceParserAST</span></a><span class="Other">(</span><span class="Identifier">deserializeKey</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">keyValueID</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">NimNode</span> {.
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
@@ -238,7 +364,7 @@ window.addEventListener('DOMContentLoaded', main);
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2022-08-02 04:26:17 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2022-08-02 05:44:16 UTC</small>
       </div>
     </div>
   </div>
