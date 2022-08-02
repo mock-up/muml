@@ -1,6 +1,6 @@
-import std/[random, macros, json]
-import types, utils, parserAST
-export getInt, getFloat, getStr, pairs
+import std/[random, macros, json, strutils]
+import builtin/types, utils, parserAST
+export json, parseEnum
 
 proc serialize (typedescNimNode: NimNode, rootType: bool): JsonNode {.compileTime.}
 
@@ -15,15 +15,20 @@ proc parseTypeName (typeNameAST: NimNode): JsonNode {.compileTime.} =
 proc serializeObject (prevJson: JsonNode, typeImplFields: NimNode): JsonNode =
   result = prevJson
   for typeImplField in typeImplFields:
-    let fieldName = typeImplField[0]
+    let fieldName = case typeImplField[0].kind
+                    of nnkIdent: $typeImplField[0]
+                    of nnkPostfix: $typeImplField[0][1]
+                    else:
+                      error("unsupported type")
+                      ""
     expectKind(typeImplField[1], {nnkSym, nnkBracketExpr})
     case typeImplField[1].kind
     of nnkSym:
-      result[$fieldName] = parseTypeName(typeImplField[1])
+      result[fieldName] = parseTypeName(typeImplField[1])
     of nnkBracketExpr:
       expectLen(typeImplField[1], 2)
       expectIdent(typeImplField[1][0], "Animation")
-      result["@" & $fieldName] = parseTypeName(typeImplField[1][1])
+      result["@" & fieldName] = parseTypeName(typeImplField[1][1])
     else: discard
 
 proc serialize (typedescNimNode: NimNode, rootType: bool): JsonNode {.compileTime.} =
@@ -141,7 +146,7 @@ proc generateParserProc (procName, typeName: NimNode, json: JsonNode): NimNode {
     resultElement = ident("resultElement_" & $keyValueID)
 
   result = quote do:
-    proc `procName`* (muml: mumlNode): mumlRootElement =
+    proc `procName`* (muml: JsonNode): mumlRootElement =
       var `resultElement` = `typeName`()
       for `key`, `val` in muml.pairs:
         discard
