@@ -1,5 +1,6 @@
-import json, muml/[types, utils, video, rectangle, header, text, triangle, builder], uuids
-export types, utils, video, rectangle, header, text, uuids, triangle, builder
+import json, muml/[types, utils, video, rectangle, header, text], uuids
+import muml/builtin/[triangle]
+export types, utils, video, rectangle, header, text, uuids, triangle
 
 type
   Muml* = object
@@ -17,23 +18,7 @@ proc muml* (json: JsonNode): Muml =
   result.header = json["muml"]["header"]
   result.contents = json["muml"]["contents"]
 
-proc type (muml: mumlNode): string =
+proc type (muml: JsonNode): string =
   if not muml.hasKey("type"):
     raise newException(Exception, "no type tag")
   result = muml["type"].getStr.removeDoubleQuotation
-
-iterator default_content* (muml: Muml): mumlRootObj =
-  for element in muml.contents:
-    var mumlObj = case element.type:
-      
-
-iterator element* (muml: mumlNode): mumlObject =
-  for elem in muml.items:
-    var mumlObj = case elem.type:
-      of "video": getVideo(elem)
-      of "triangle": getTriangle(elem)
-      of "rectangle": getRectangle(elem)
-      of "text": getText(elem)
-      else: raise newException(Exception, "not found tag")
-    mumlObj.uuid = genUuid()
-    yield mumlObj
