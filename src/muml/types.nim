@@ -1,9 +1,11 @@
 import json, Palette/color, uuids
 
 type
-  mumlRootElement* = ref object of RootObj
-  
   Animation* [T] = seq[T]
+
+  mumlRootElement* = ref object of RootObj
+    layer: int
+    frame: Animation[int]
 
   mumlKind* = enum
     mumlKindVideo
