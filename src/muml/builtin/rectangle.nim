@@ -1,7 +1,7 @@
 import types, ../builder
 
 type
-  Reactangle* = ref object of mumlRootElement
+  Rectangle* = ref object of mumlRootElement
     position*: Animation[mumlPosition]
     width*: Animation[float]
     height*: Animation[float]
@@ -10,4 +10,4 @@ type
     opacity*: Animation[float]
     # color*: Animation[Color]
 
-mumlBuilder(Reactangle)
+mumlBuilder(Rectangle)
