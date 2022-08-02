@@ -1,6 +1,6 @@
 import std/[random, macros, json, strutils]
 import builtin/types, utils, parserAST
-export json, parseEnum
+export json, parseEnum, removeDoubleQuotation
 
 proc serialize (typedescNimNode: NimNode, rootType: bool): JsonNode {.compileTime.}
 
