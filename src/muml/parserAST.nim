@@ -46,7 +46,7 @@ proc getEnumParserAST* (typeName, deserializeKey: string, keyValueID: int): NimN
   result = nnkOfBranch.newTree(
     newLit(deserializeKey),
     quote do:
-      `resultElement`.`key` = getStr(`val`).removeDoubleQuotation.parseEnum[`typeName`]
+      `resultElement`.`key` = parseEnum[`typeName`](getStr(`val`).removeDoubleQuotation)
   )
 
 proc getFloatSequenceParserAST* (deserializeKey: string, keyValueID: int): NimNode =
