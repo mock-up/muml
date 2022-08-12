@@ -1,13 +1,9 @@
-import json, muml/[utils, builder, deserializer]
-import muml/builtin/[triangle, rectangle, video, text]
-export utils, video, rectangle, text, triangle, builder, deserializer
+import std/[json]
+import muml/[utils, builder, deserializer, types, header]
+import muml/builtin/[triangle, rectangle, video, text, commonTypes]
+export utils, video, rectangle, text, triangle, builder, deserializer, types, commonTypes, header
 
-type
-  Muml* = object
-    header: JsonNode
-    contents: JsonNode
-
-proc muml* (json: JsonNode): Muml =
+proc readMuml* (json: JsonNode): mumlNode =
   if not json.hasKey("muml"):
     raise newException(Exception, "no muml")
   if not json["muml"].hasKey("header"):
@@ -18,7 +14,5 @@ proc muml* (json: JsonNode): Muml =
   result.header = json["muml"]["header"]
   result.contents = json["muml"]["contents"]
 
-proc type* (muml: JsonNode): string =
-  if not muml.hasKey("type"):
-    raise newException(Exception, "no type tag")
-  result = muml["type"].getStr.removeDoubleQuotation
+proc readMuml* (path: string): mumlNode =
+  result = readmuml(parseFile(path))

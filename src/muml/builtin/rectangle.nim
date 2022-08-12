@@ -1,4 +1,4 @@
-import types, ../builder
+import commonTypes, ../builder
 
 type
   Rectangle* = ref object of mumlRootElement

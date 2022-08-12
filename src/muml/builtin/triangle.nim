@@ -1,4 +1,4 @@
-import types, ../builder
+import commonTypes, ../builder
 
 type
   Triangle* = ref object of mumlRootElement

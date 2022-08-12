@@ -1,11 +1,9 @@
-import types, ../builder
+import commonTypes, ../builder
 
 type
   mumlVideoFrame* = object
     start*: int
     stop*: int
-
-  mumlFilter* = object
 
   Video* = ref object of mumlRootElement
     path*: string

@@ -1,5 +1,5 @@
 import std/macros, json, builder
-import builtin/types
+import builtin/commonTypes
 import uuids
 
 const BuiltInElements* = [
@@ -34,18 +34,24 @@ proc caseOfApplyParserAST (elements: seq[string]): NimNode =
   )
 
 macro mumlDeserializer* (customElements: varargs[untyped]): untyped =
-  var elements = @BuiltInElements
+  var
+    elements = @BuiltInElements
+    elementsAST = nnkBracket.newTree()
   for customElement in customElements:
     elements.add $customElement
+  for element in elements:
+    elementsAST.add newLit($element)
 
   let
-    procName = newIdentNode("muml")
+    procName = newIdentNode("deserialize")
     elementIdent = newIdentNode("element")
+    definedElementsIdent = newIdentNode("DefinedElements")
     caseOfApplyParser = caseOfApplyParserAST(elements)
 
   result = quote do:
-    proc `procName`* (json: JsonNode): seq[mumlRootElement] =
-      for `elementIdent` in json:
+    const `definedElementsIdent`* = `elementsAST`
+    proc `procName`* (muml: mumlNode): seq[mumlRootElement] =
+      for `elementIdent` in muml.contents:
         var mumlObj = `caseOfApplyParser`
         mumlObj.id = genUuid()
         result.add mumlObj

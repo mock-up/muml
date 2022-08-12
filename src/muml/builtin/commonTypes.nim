@@ -8,6 +8,8 @@ type
     layer: int
     frame: Animation[int]
   
+  mumlFilter* = ref object of RootObj
+  
   mumlPosition* = object
     x*: float
     y*: float
