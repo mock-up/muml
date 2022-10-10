@@ -1,3 +1,2 @@
-Muml	muml.html#Muml	muml: Muml	
-muml	muml.html#muml,JsonNode	muml: muml(json: JsonNode): Muml	
-`type`	muml.html#type,JsonNode	muml: `type`(muml: JsonNode): string	
+readMuml	muml.html#readMuml,JsonNode	muml: readMuml(json: JsonNode): mumlNode	
+readMuml	muml.html#readMuml,string	muml: readMuml(path: string): mumlNode	

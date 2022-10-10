@@ -1,0 +1,7 @@
+projectName	muml/header.html#projectName,mumlHeader	header: projectName(header: mumlHeader): string	
+width	muml/header.html#width,mumlHeader	header: width(header: mumlHeader): int	
+height	muml/header.html#height,mumlHeader	header: height(header: mumlHeader): int	
+frameCount	muml/header.html#frameCount,mumlHeader	header: frameCount(header: mumlHeader): int	
+outputPath	muml/header.html#outputPath,mumlHeader	header: outputPath(header: mumlHeader): string	
+fps	muml/header.html#fps,mumlHeader	header: fps(header: mumlHeader): float	
+parseHeader	muml/header.html#parseHeader,mumlNode	header: parseHeader(muml: mumlNode): mumlHeader	

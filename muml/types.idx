@@ -1,0 +1,6 @@
+mumlNode	muml/types.html#mumlNode	types: mumlNode	
+mumlHeader	muml/types.html#mumlHeader	types: mumlHeader	
+header	muml/types.html#header,mumlNode	types: header(muml: mumlNode): JsonNode	
+contents	muml/types.html#contents,mumlNode	types: contents(muml: mumlNode): JsonNode	
+header=	muml/types.html#header=,mumlNode,JsonNode	types: header=(muml: var mumlNode; header: JsonNode)	
+contents=	muml/types.html#contents=,mumlNode,JsonNode	types: contents=(muml: var mumlNode; contents: JsonNode)	
